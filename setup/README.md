@@ -1,6 +1,8 @@
 # Setting up the dashboard and services on a new Ubuntu 18.04 server
 
-This will install:
+**Before anything, `git clone` this repository to `/opt`**
+
+This guide will install:
  - Required dependencies through apt and pip
  - selfhosted-dashboard to /opt
  - BookStack
