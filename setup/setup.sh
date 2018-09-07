@@ -17,3 +17,9 @@ sudo cp -R -p /opt/selfhosted/services/systemd/. /lib/systemd/system/.
 sudo cp -R /opt/selfhosted/services/nginx/. /etc/nginx/sites-available/.
 sudo ln -s /etc/nginx/sites-available/dashboard /etc/nginx/sites-enabled
 sudo ln -s /etc/nginx/sites-available/bookstack /etc/nginx/sites-enabled
+
+# Start services
+sudo systemctl daemon-reload
+sudo systemctl enable selfhosted-dashboard
+sudo systemctl start selfhosted-dashboard
+sudo systemctl restart nginx
