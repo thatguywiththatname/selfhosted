@@ -8,7 +8,7 @@ This will install:
 ## Requirements
 
 Going through these steps will install all of the required dependencies as well
-as set up the necessary users and permissions
+as set up the necessary users, groups, and permissions
 
  - Make sure the package list is up to date (apt update, upgrade)
 

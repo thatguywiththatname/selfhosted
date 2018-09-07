@@ -1,4 +1,4 @@
-# Add selfhosted user and sort out permissions
+# Add selfhosted user + group and sort out permissions
 sudo adduser --system --group --no-create-home selfhosted
 sudo chown -R selfhosted:selfhosted /opt/selfhosted
 
