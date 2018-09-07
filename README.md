@@ -1,5 +1,6 @@
 # selfhosted
 
-The "dashboard" and other parts of my self-hosted services
+My personal server config, website, and some selfhosted services such as
+bookstack
 
 Currently setup to automatically run on `simonjenner.gq`
