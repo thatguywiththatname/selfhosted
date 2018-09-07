@@ -1,6 +1,13 @@
 server {
     listen 80;
-    server_name simonjenner.gq www.simonjenner.gq;
+    server_name www.simonjenner.gq;
+    # 301 is best practice for tablet, phone, desktop, and seo
+    return 301 $scheme://simonjenner.gq$request_uri;
+}
+
+server {
+    listen 80;
+    server_name simonjenner.gq;
 
     location / {
         include uwsgi_params;
