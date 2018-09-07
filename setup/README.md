@@ -39,18 +39,18 @@ This should completely nuke apache from your system
 
 BookStacks nginx file(s) will be created when `setup.sh` is run later
 
+## selfhosted-dashboard
+
+Simply execute this script and selfhosted-dashboard will setup
+
+`sudo sh setup.sh`
+
 ## Setup https for all nginx pages
 
 Vist [Let's Encrypt](https://letsencrypt.org/) and follow their getting started
 guide for nginx on ubuntu, it should do everything automatically
 
 Now the https certificate(s) need to be automatically renewed, to do this TODO:
-
-## selfhosted-dashboard
-
-Simply execute this script and selfhosted-dashboard will setup
-
-`sudo sh setup.sh`
 
 ## UFW / firewall
 
