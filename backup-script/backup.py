@@ -25,11 +25,10 @@ def downloadDirectory(sftp, remoteDir, localDir):
         else:
             sftp.get(remotePath, localPath)
 
+# Dump Redis db and dump bookstack sql db to users home path
 commandsToExecute = [
-    # Dump Redis db
     "redis-cli -s /tmp/redis.sock SAVE",
-    # Dump bookstack sql db to users home path
-    f"mysqldump -u bookstack -p{sqlPassword} bookstack > /home/{username}/bookstack.sql"
+    "mysqldump -u bookstack -p{} bookstack > /home/{}/bookstack.sql".format(sqlPassword, username)
 ]
 
 backupLocalPath = os.path.join("/home", localUsername, "selfhosted-backups")
@@ -43,7 +42,7 @@ backupPaths = {
 backupFiles = {
     "/var/lib/redis/dump.rdb": "redis",
     "/var/www/bookstack/.env": "bookstack",
-    f"/home/{username}/bookstack.sql": "bookstack"
+    "/home/{}/bookstack.sql": "bookstack".format(username)
 }
 
 # Setup
