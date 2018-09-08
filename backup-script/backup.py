@@ -51,9 +51,8 @@ transport.connect(username=username, password=password)
 
 # First of all run the commands we need to
 ssh = transport.open_session()
-ssh.get_pty()
-for command in commandsToExecute:
-    ssh.exec_command(command)
+bigCommand = " && ".join(commandsToExecute)  # TODO: Make this a bit nicer, look into using sshclient(?)
+ssh.exec_command(bigCommand)
 ssh.close()
 
 # Then connect through sftp

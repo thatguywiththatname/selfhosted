@@ -10,7 +10,7 @@ Stores backups in `/home/$localUsername/selfhosted-backups`
 Before running the script there are several variables that need to be filled out
 in order for it to work. The bookstack sql password can be found in bookstacks
 `.env` file. Make sure the username can access `/var/lib/redis`, if not add the
-user to the `redis` group
+user to the `redis` group.
 
 Running `setup.sh` will install the requirements using `pip3` and then setup a
 cron job to the script run every 12 hours using `python3`
