@@ -46,6 +46,7 @@ backupLocalPath = os.path.join("/home", localUsername, "selfhosted-backups", tim
 # A dict of remoteDirectoryPath: $backupLocalPath/localDirectoryPath
 backupPaths = {
     "/var/log/SLB": "logs/SLB",
+    "/var/log/selfhosted": "logs/selfhosted",
     "/var/www/bookstack/public/uploads": "bookstack/public/uploads",
     "/var/www/bookstack/storage/uploads": "bookstack/storage/uploads"
 }
