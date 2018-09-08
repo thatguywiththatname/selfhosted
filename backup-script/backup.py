@@ -34,6 +34,7 @@ def runCommand(transport, command):
 
 # Timestamp for this run
 timestamp = datetime.today().strftime("%H:%M_%d-%m-%Y")
+logger.info("Using timestamp: {}".format(timestamp))
 
 # Dump Redis db and dump bookstack sql db to users home path
 commandsToExecute = [
