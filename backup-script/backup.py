@@ -1,3 +1,4 @@
+from datetime import datetime
 import paramiko
 import stat
 import os
@@ -25,13 +26,16 @@ def downloadDirectory(sftp, remoteDir, localDir):
         else:
             sftp.get(remotePath, localPath)
 
+# Timestamp for this run
+timestamp = datetime.today().strftime("%H:%M_%d-%m-%Y")
+
 # Dump Redis db and dump bookstack sql db to users home path
 commandsToExecute = [
     "redis-cli -s /tmp/redis.sock SAVE",
     "mysqldump -u bookstack -p{} bookstack > /home/{}/bookstack.sql".format(sqlPassword, username)
 ]
 
-backupLocalPath = os.path.join("/home", localUsername, "selfhosted-backups")
+backupLocalPath = os.path.join("/home", localUsername, "selfhosted-backups", timestamp)
 # A dict of remoteDirectoryPath: $backupLocalPath/localDirectoryPath
 backupPaths = {
     "/var/log/SLB": "logs/SLB",
@@ -51,7 +55,8 @@ transport.connect(username=username, password=password)
 
 # First of all run the commands we need to
 ssh = transport.open_session()
-bigCommand = " && ".join(commandsToExecute)  # TODO: Make this a bit nicer, look into using sshclient(?)
+# TODO: Make this a bit less dodgy, look into using sshclient(?)
+bigCommand = " && ".join(commandsToExecute)
 ssh.exec_command(bigCommand)
 ssh.close()
 
