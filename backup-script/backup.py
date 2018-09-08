@@ -42,7 +42,7 @@ backupPaths = {
 backupFiles = {
     "/var/lib/redis/dump.rdb": "redis",
     "/var/www/bookstack/.env": "bookstack",
-    "/home/{}/bookstack.sql": "bookstack".format(username)
+    "/home/{}/bookstack.sql".format(username): "bookstack"
 }
 
 # Setup
