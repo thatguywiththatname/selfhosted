@@ -18,7 +18,7 @@ def downloadDirectory(sftp, remoteDir, localDir):
     os.path.exists(localDir) or os.makedirs(localDir)
     dir_items = sftp.listdir_attr(remoteDir)
     for item in dir_items:
-        remotePath = os.path.join(remoteDir, item.filename)         
+        remotePath = os.path.join(remoteDir, item.filename)
         localPath = os.path.join(localDir, item.filename)
         if stat.S_ISDIR(item.st_mode):
             downloadDirectory(sftp, remotePath, localPath)
@@ -64,7 +64,9 @@ for remoteDir in backupPaths:
     downloadDirectory(sftp, remoteDir, os.path.join(backupLocalPath, backupPaths[remoteDir]))
 
 for remoteFile in backupFiles:
-    sftp.get(remoteFile, os.path.join(backupLocalPath, backupFiles[remoteFile]))
+    localPath = os.path.join(backupLocalPath, backupFiles[remoteFile])
+    os.path.exists(localPath) or os.makedirs(localPath)
+    sftp.get(remoteFile, localPath)
 
 sftp.close()
 transport.close()
