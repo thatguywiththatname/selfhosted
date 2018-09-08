@@ -40,9 +40,9 @@ backupPaths = {
 }
 # A dict of remoteFilePath: $$backupLocalPath/localFilePath
 backupFiles = {
-    "/var/lib/redis/dump.rdb": "redis",
-    "/var/www/bookstack/.env": "bookstack",
-    "/home/{}/bookstack.sql".format(username): "bookstack"
+    "/var/lib/redis/dump.rdb": "redis/dump.rdb",
+    "/var/www/bookstack/.env": "bookstack/.env",
+    "/home/{}/bookstack.sql".format(username): "bookstack/bookstack.sql"
 }
 
 # Setup
@@ -62,9 +62,10 @@ for remoteDir in backupPaths:
     downloadDirectory(sftp, remoteDir, os.path.join(backupLocalPath, backupPaths[remoteDir]))
 
 for remoteFile in backupFiles:
-    localPath = os.path.join(backupLocalPath, backupFiles[remoteFile])
-    os.path.exists(localPath) or os.makedirs(localPath)
-    sftp.get(remoteFile, localPath)
+    localFilePath = os.path.join(backupLocalPath, backupFiles[remoteFile])
+    localDirPath = os.path.split(localFilePath)[0]
+    os.path.exists(localDirPath) or os.makedirs(localDirPath)
+    sftp.get(remoteFile, localFilePath)
 
 sftp.close()
 transport.close()
