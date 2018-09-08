@@ -96,8 +96,9 @@ for backup in backups:
         # Falls on a 1st or a 15th so don't do anything
         pass
     else:
-        delta = datetime.date(day=day, month=month, year=year)
-        if (now - delta).days > 7:
+        backupDate = datetime.date(day=day, month=month, year=year)
+        backupDate = datetime.datetime.combine(backupDate, datetime.datetime.min.time())
+        if (now - backupDate).days > 7:
             # Directory is older than a week
             logger.info("Removing backup {}".format(backup))
             shutil.rmtree(os.path.join(backupDirectory, backup))
