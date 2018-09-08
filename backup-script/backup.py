@@ -1,7 +1,8 @@
-from datetime import datetime
 from userDetails import *
+import datetime
 import paramiko
 import logging
+import shutil
 import stat
 import os
 
@@ -33,7 +34,7 @@ def runCommand(transport, command):
     ssh.close()
 
 # Timestamp for this run
-timestamp = datetime.today().strftime("%H:%M:%S//%d-%m-%Y")
+timestamp = datetime.datetime.today().strftime("%H:%M:%S//%d-%m-%Y")
 logger.info("Starting backup, using timestamp: {}".format(timestamp))
 
 # Dump Redis db and dump bookstack sql db to users home path
@@ -42,15 +43,16 @@ commandsToExecute = [
     "mysqldump -u bookstack -p{} bookstack > /home/{}/bookstack.sql".format(sqlPassword, username)
 ]
 
-backupLocalPath = os.path.join("/home", localUsername, "selfhosted-backups", timestamp)
-# A dict of remoteDirectoryPath: $backupLocalPath/localDirectoryPath
+backupDirectory = os.path.join("/home", localUsername, "selfhosted-backups")
+currentBackupPath = os.path.join(backupDirectory, timestamp)
+# A dict of remoteDirectoryPath: $currentBackupPath/localDirectoryPath
 backupPaths = {
     "/var/log/SLB": "logs/SLB",
     "/var/log/selfhosted": "logs/selfhosted",
     "/var/www/bookstack/public/uploads": "bookstack/public/uploads",
     "/var/www/bookstack/storage/uploads": "bookstack/storage/uploads"
 }
-# A dict of remoteFilePath: $$backupLocalPath/localFilePath
+# A dict of remoteFilePath: $currentBackupPath/localFilePath
 backupFiles = {
     "/var/lib/redis/dump.rdb": "redis/dump.rdb",
     "/var/www/bookstack/.env": "bookstack/.env",
@@ -69,11 +71,11 @@ for command in commandsToExecute:
 sftp = paramiko.SFTPClient.from_transport(transport)
 
 for remoteDir in backupPaths:
-    downloadDirectory(sftp, remoteDir, os.path.join(backupLocalPath, backupPaths[remoteDir]))
+    downloadDirectory(sftp, remoteDir, os.path.join(currentBackupPath, backupPaths[remoteDir]))
 
 for remoteFile in backupFiles:
     logger.info("Downloading {}".format(remoteFile))
-    localFilePath = os.path.join(backupLocalPath, backupFiles[remoteFile])
+    localFilePath = os.path.join(currentBackupPath, backupFiles[remoteFile])
     localDirPath = os.path.split(localFilePath)[0]
     os.path.exists(localDirPath) or os.makedirs(localDirPath)
     sftp.get(remoteFile, localFilePath)
@@ -81,4 +83,23 @@ for remoteFile in backupFiles:
 sftp.close()
 transport.close()
 
-logger.info("Finished backup")
+logger.info("Finished downloading backup")
+logger.info("Analysing backup directory")
+
+now = datetime.datetime.now()
+backups = [d for d in os.listdir(backupDirectory) if os.path.isdir(os.path.join(backupDirectory, d))]
+for backup in backups:
+    # dd/mm/yyyy
+    date = backup.split("//")[1]
+    day, month, year = date.split("-")
+    if day == 1 or day == 15:
+        # Falls on a 1st or a 15th so don't do anything
+        pass
+    else:
+        delta = datetime.date(day=day, month=month, year=year)
+        if (now - delta).days > 7:
+            # Directory is older than a week
+            logger.info("Removing backup {}".format(backup))
+            shutil.rmtree(os.path.join(backupDirectory, backup))
+
+logger.info("Finished")

@@ -3,7 +3,7 @@ localUsername = ""
 
 # The host and port for the SSH connection
 host = ""
-port = 0
+port = 22
 
 # The SSH username and password
 username = ""

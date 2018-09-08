@@ -21,5 +21,4 @@ Currently uses this structure:
    - If the timestamp is within the last week, keep it
    - If the timestamp falls on the 1st or the 15th (roughly half way though the
    month), keep it
-   - If the timestamp is not within the last year, delete it and it's contents
    - If none of the above are true, delete it and it's contents
