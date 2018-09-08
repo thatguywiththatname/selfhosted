@@ -34,7 +34,7 @@ def runCommand(transport, command):
     ssh.close()
 
 # Timestamp for this run
-timestamp = datetime.datetime.today().strftime("%H:%M:%S//%d-%m-%Y")
+timestamp = datetime.datetime.today().strftime("%H:%M:%S@%d-%m-%Y")
 logger.info("Starting backup, using timestamp: {}".format(timestamp))
 
 # Dump Redis db and dump bookstack sql db to users home path
@@ -90,7 +90,7 @@ now = datetime.datetime.now()
 backups = [d for d in os.listdir(backupDirectory) if os.path.isdir(os.path.join(backupDirectory, d))]
 for backup in backups:
     # dd/mm/yyyy
-    date = backup.split("//")[1]
+    date = backup.split("@")[1]
     day, month, year = date.split("-")
     if day == 1 or day == 15:
         # Falls on a 1st or a 15th so don't do anything
