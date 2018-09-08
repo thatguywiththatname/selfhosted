@@ -4,7 +4,7 @@ Not designed to be run on the server, this script connects to given ip & port
 using sftp and downloads bookstack files, a redis dump, a bookstack sql dump,
 and SpaceX-Launch-Bot log files. Designed to be run as a cron task or similar
 
-Writes a log to `/home/$localUsername/selfhosted-sftp-backup.log`
+Writes a log to `/home/$localUsername/selfhosted-backup.log`
 Stores backups in `/home/$localUsername/selfhosted-backups`
 
 Before running the script there are several variables that need to be filled out

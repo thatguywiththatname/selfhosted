@@ -5,7 +5,7 @@ import logging
 import stat
 import os
 
-logFilePath = os.path.join("/home", localUsername, "selfhosted-sftp-backup.log")
+logFilePath = os.path.join("/home", localUsername, "selfhosted-backup.log")
 handler = logging.FileHandler(filename=logFilePath, encoding="UTF-8", mode="a")
 handler.setFormatter(logging.Formatter("%(asctime)s : %(levelname)s : %(message)s"))
 logging.basicConfig(level=logging.INFO, handlers=[handler])
@@ -33,7 +33,7 @@ def runCommand(transport, command):
     ssh.close()
 
 # Timestamp for this run
-timestamp = datetime.today().strftime("%H:%M:%S*%d-%m-%Y")
+timestamp = datetime.today().strftime("%H:%M:%S//%d-%m-%Y")
 logger.info("Starting backup, using timestamp: {}".format(timestamp))
 
 # Dump Redis db and dump bookstack sql db to users home path
