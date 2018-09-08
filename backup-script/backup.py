@@ -1,16 +1,15 @@
 from datetime import datetime
+from userDetails import *
 import paramiko
+import logging
 import stat
 import os
 
-# User Defined Variables #######################################################
-localUsername = ""  # The username the script will be running under
-host = ""
-port = 0
-username = ""
-password = ""
-sqlPassword = ""  # The password for the mysql servers bookstack user
-################################################################################
+logFilePath = "/var/log/selfhosted-sftp-backup.log"
+handler = logging.FileHandler(filename=logFilePath, encoding="UTF-8", mode="a")
+handler.setFormatter(logging.Formatter("%(asctime)s : %(levelname)s : %(message)s"))
+logging.basicConfig(level=logging.INFO, handlers=[handler])
+logger = logging.getLogger(__name__)
 
 def downloadDirectory(sftp, remoteDir, localDir):
     """
@@ -24,7 +23,14 @@ def downloadDirectory(sftp, remoteDir, localDir):
         if stat.S_ISDIR(item.st_mode):
             downloadDirectory(sftp, remotePath, localPath)
         else:
+            logger.info("Getting {}".format(remotePath))
             sftp.get(remotePath, localPath)
+
+def runCommand(transport, command):
+    logger.info("Executing command {}".format(command))
+    ssh = transport.open_session()
+    ssh.exec_command(command)
+    ssh.close()
 
 # Timestamp for this run
 timestamp = datetime.today().strftime("%H:%M_%d-%m-%Y")
@@ -53,20 +59,19 @@ backupFiles = {
 transport = paramiko.Transport((host, port))
 transport.connect(username=username, password=password)
 
-# First of all run the commands we need to
-ssh = transport.open_session()
-# TODO: Make this a bit less dodgy, look into using sshclient(?)
-bigCommand = " && ".join(commandsToExecute)
-ssh.exec_command(bigCommand)
-ssh.close()
+# Run the commands we need to through SSH
+for command in commandsToExecute:
+    runCommand(transport, command)
 
 # Then connect through sftp
 sftp = paramiko.SFTPClient.from_transport(transport)
 
 for remoteDir in backupPaths:
+    logger.info("Getting {}".format(remoteDir))
     downloadDirectory(sftp, remoteDir, os.path.join(backupLocalPath, backupPaths[remoteDir]))
 
 for remoteFile in backupFiles:
+    logger.info("Getting {}".format(remoteFile))
     localFilePath = os.path.join(backupLocalPath, backupFiles[remoteFile])
     localDirPath = os.path.split(localFilePath)[0]
     os.path.exists(localDirPath) or os.makedirs(localDirPath)
