@@ -5,7 +5,7 @@ import logging
 import stat
 import os
 
-logFilePath = "/var/log/selfhosted-sftp-backup.log"
+logFilePath = os.path.join("/home", localUsername, "selfhosted-sftp-backup.log")
 handler = logging.FileHandler(filename=logFilePath, encoding="UTF-8", mode="a")
 handler.setFormatter(logging.Formatter("%(asctime)s : %(levelname)s : %(message)s"))
 logging.basicConfig(level=logging.INFO, handlers=[handler])
@@ -23,7 +23,7 @@ def downloadDirectory(sftp, remoteDir, localDir):
         if stat.S_ISDIR(item.st_mode):
             downloadDirectory(sftp, remotePath, localPath)
         else:
-            logger.info("Getting {}".format(remotePath))
+            logger.info("Downloading {}".format(remotePath))
             sftp.get(remotePath, localPath)
 
 def runCommand(transport, command):
@@ -33,8 +33,8 @@ def runCommand(transport, command):
     ssh.close()
 
 # Timestamp for this run
-timestamp = datetime.today().strftime("%H:%M_%d-%m-%Y")
-logger.info("Using timestamp: {}".format(timestamp))
+timestamp = datetime.today().strftime("%H:%M:%S*%d-%m-%Y")
+logger.info("Starting backup, using timestamp: {}".format(timestamp))
 
 # Dump Redis db and dump bookstack sql db to users home path
 commandsToExecute = [
@@ -68,11 +68,10 @@ for command in commandsToExecute:
 sftp = paramiko.SFTPClient.from_transport(transport)
 
 for remoteDir in backupPaths:
-    logger.info("Getting {}".format(remoteDir))
     downloadDirectory(sftp, remoteDir, os.path.join(backupLocalPath, backupPaths[remoteDir]))
 
 for remoteFile in backupFiles:
-    logger.info("Getting {}".format(remoteFile))
+    logger.info("Downloading {}".format(remoteFile))
     localFilePath = os.path.join(backupLocalPath, backupFiles[remoteFile])
     localDirPath = os.path.split(localFilePath)[0]
     os.path.exists(localDirPath) or os.makedirs(localDirPath)
@@ -80,3 +79,5 @@ for remoteFile in backupFiles:
 
 sftp.close()
 transport.close()
+
+logger.info("Finished backup")
