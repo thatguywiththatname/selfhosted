@@ -1,5 +1,5 @@
 """
-Safely serve selfhosted-dashboard
+Safely serve selfhosted-webserver
 """
 
 from main import app
