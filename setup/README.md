@@ -4,7 +4,7 @@
 
 This guide will install:
  - Required dependencies through apt and pip
- - selfhosted-dashboard to /opt
+ - selfhosted-dashboard
  - BookStack
 
 ## Requirements
