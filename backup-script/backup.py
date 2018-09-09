@@ -6,7 +6,12 @@ import shutil
 import stat
 import os
 
-logFilePath = os.path.join("/home", localUsername, "selfhosted-backup.log")
+# Where all files & folders will be
+parentDir = os.path.join("/home", localUsername, "selfhosted")
+# mkdir if not exists
+os.path.exists(parentDir) or os.makedirs(parentDir)
+
+logFilePath = os.path.join(parentDir, "selfhosted-backup.log")
 handler = logging.FileHandler(filename=logFilePath, encoding="UTF-8", mode="a")
 handler.setFormatter(logging.Formatter("%(asctime)s : %(levelname)s : %(message)s"))
 logging.basicConfig(level=logging.INFO, handlers=[handler])
@@ -43,7 +48,7 @@ commandsToExecute = [
     "mysqldump -u bookstack -p{} bookstack > /home/{}/bookstack.sql".format(sqlPassword, username)
 ]
 
-backupDirectory = os.path.join("/home", localUsername, "selfhosted-backups")
+backupDirectory = os.path.join(parentDir, "selfhosted-backups")
 currentBackupPath = os.path.join(backupDirectory, timestamp)
 # A dict of remoteDirectoryPath: $currentBackupPath/localDirectoryPath
 backupPaths = {

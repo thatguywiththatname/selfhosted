@@ -1,19 +1,21 @@
 # backup-script
 
-**For this script to work the SSH user needs to be a member of the redis group**
-
 Not designed to be run on the server, this script connects to given ip & port
 using sftp and downloads bookstack files, a redis dump, a bookstack sql dump,
 and SpaceX-Launch-Bot log files. Designed to be run as a cron task or similar
 
-Writes a log to `/home/$localUsername/selfhosted-backup.log`
+For this script to work:
 
-Stores backups in `/home/$localUsername/selfhosted-backups`
+ - The SSH user on the server needs to be able to access `/var/lib/redis`, if not add the user to the `redis` group.
+ - The requirements in requirements.txt need to be installed through pip3
 
 Before running the script there are several variables that need to be filled out
-in order for it to work. The bookstack sql password can be found in bookstacks
-`.env` file. Make sure the username can access `/var/lib/redis`, if not add the
-user to the `redis` group.
+in `userDetails.py` in order for it to work. The bookstack sql password can be
+found in bookstacks `.env` file 
+
+Writes a log to `/home/$localUsername/selfhosted/selfhosted-backup.log`
+
+Stores backups in `/home/$localUsername/selfhosted/selfhosted-backups`
 
 Currently uses this structure:
  - Backup relevant files to a directory which name is a timestamp
