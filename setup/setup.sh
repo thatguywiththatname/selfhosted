@@ -13,8 +13,11 @@ sudo mkdir /var/log/selfhosted
 sudo chown -R selfhosted:selfhosted /var/log/selfhosted
 
 # Move service files to correct locations
-sudo cp -R -p /opt/selfhosted/source/services/systemd/. /lib/systemd/system/.
-sudo cp -R /opt/selfhosted/source/services/nginx/. /etc/nginx/sites-available/.
+sudo cp -R /opt/selfhosted/setup/services/fail2ban/. /etc/fail2ban/.
+sudo cp -R /opt/selfhosted/setup/services/systemd/. /lib/systemd/system/.
+sudo cp -R /opt/selfhosted/setup/services/nginx/. /etc/nginx/sites-available/.
+
+# Link nginx sites to be enabled
 sudo ln -s /etc/nginx/sites-available/selfhosted-webserver /etc/nginx/sites-enabled
 sudo ln -s /etc/nginx/sites-available/bookstack /etc/nginx/sites-enabled
 
