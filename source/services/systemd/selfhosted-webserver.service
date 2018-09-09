@@ -1,5 +1,5 @@
 [Unit]
-Description=selfhosted dashboard webserver service
+Description=selfhosted-webserver service
 After=network.target
 After=systemd-user-sessions.service
 After=network-online.target
@@ -7,8 +7,8 @@ After=network-online.target
 [Service]
 User=selfhosted
 Group=www-data
-WorkingDirectory=/opt/selfhosted/source/selfhosted-dashboard
-ExecStart=/usr/local/bin/uwsgi --ini selfhosted-dashboard.ini
+WorkingDirectory=/opt/selfhosted/source/selfhosted-webserver
+ExecStart=/usr/local/bin/uwsgi --ini selfhosted-webserver.ini
 Restart=always
 RestartSec=10
 StandardOutput=journal

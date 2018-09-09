@@ -1,10 +1,10 @@
-# Setting up the dashboard and services on a new Ubuntu 18.04 server
+# Setting up an Ubuntu 18.04 server
 
 **Before anything, `git clone` this repository to `/opt`**
 
 This guide will install:
  - Required dependencies through apt and pip
- - selfhosted-dashboard
+ - selfhosted-webserver
  - BookStack
 
 ## Requirements
@@ -41,9 +41,9 @@ This should completely nuke apache from your system
 
 BookStacks nginx file(s) will be created when `setup.sh` is run later
 
-## selfhosted-dashboard
+## selfhosted-webserver
 
-Simply execute this script and selfhosted-dashboard will setup
+Simply execute this script and selfhosted-webserver will setup
 
 `sudo sh setup.sh`
 
@@ -52,7 +52,9 @@ Simply execute this script and selfhosted-dashboard will setup
 Vist [Let's Encrypt](https://letsencrypt.org/) and follow their getting started
 guide for nginx on ubuntu, it should do everything automatically
 
-Now the https certificate(s) need to be automatically renewed, to do this TODO:
+Now the https certificate(s) need to be automatically renewed, to do this create
+a cron task to run `certbot renew` (or `certbot-auto renew`, depending on what
+you installed) every day at a random time
 
 ## UFW / firewall
 
