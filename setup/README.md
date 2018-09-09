@@ -58,7 +58,9 @@ you installed) every day at a random time
 
 ## UFW / firewall
 
-If you are using ufw (or any other firewall), https traffic through nginx will
-need to be enabled. To enable it for ufw, run this command:
+If you are using ufw (or any other firewall), HTTPS traffic through nginx will
+need to be enabled. HTTP will also need to be enabled to allow http -> https
+redirections. To enable them for ufw, run these commands:
 
-`sudo ufw allow 'Nginx HTTPS'`
+ - `sudo ufw allow 'Nginx HTTPS'`
+ - `sudo ufw allow 'Nginx HTTP'`
