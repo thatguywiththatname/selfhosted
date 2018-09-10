@@ -2,6 +2,7 @@ from userDetails import *
 import datetime
 import paramiko
 import logging
+import tarfile
 import shutil
 import stat
 import os
@@ -53,6 +54,8 @@ currentBackupPath = os.path.join(backupDirectory, timestamp)
 # A dict of remoteDirectoryPath: $currentBackupPath/localDirectoryPath
 backupPaths = {
     "/var/log/SLB": "logs/SLB",
+    "/var/log/redis": "logs/redis",
+    "/var/log/nginx": "logs/nginx",
     "/var/log/selfhosted": "logs/selfhosted",
     "/var/www/bookstack/public/uploads": "bookstack/public/uploads",
     "/var/www/bookstack/storage/uploads": "bookstack/storage/uploads"
@@ -87,14 +90,22 @@ for remoteFile in backupFiles:
 
 sftp.close()
 transport.close()
-
 logger.info("Finished downloading backup")
+
+logger.info("Compressing backup")
+currentBackupFile = os.path.join(backupDirectory, (timestamp + ".tar.gz"))
+# https://stackoverflow.com/a/17081026/6396652
+with tarfile.open(currentBackupFile, "w:gz") as tar:
+    tar.add(currentBackupPath, arcname=os.path.basename(currentBackupPath))
+# Compressed to file, remove directory
+shutil.rmtree(currentBackupPath)
+
 logger.info("Analysing backup directory")
 
 now = datetime.datetime.now()
-backups = [d for d in os.listdir(backupDirectory) if os.path.isdir(os.path.join(backupDirectory, d))]
-for backup in backups:
+for backup in os.listdir(backupDirectory):
     # dd/mm/yyyy
+    backup = os.path.splitext(backup)[0]  # Get rid of .tar.gz
     date = backup.split("@")[0]
     day, month, year = [int(i) for i in date.split("-")]
     if day == 1 or day == 15:
@@ -106,6 +117,6 @@ for backup in backups:
         if (now - backupDate).days > 7:
             # Directory is older than a week
             logger.info("Removing backup {}".format(backup))
-            shutil.rmtree(os.path.join(backupDirectory, backup))
+            os.remove(os.path.join(backupDirectory, backup))
 
 logger.info("Finished")

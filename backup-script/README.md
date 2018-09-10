@@ -8,6 +8,7 @@ For this script to work:
 
  - The SSH user on the server needs to be able to access `/var/lib/redis`, if not add the user to the `redis` group.
  - The requirements in requirements.txt need to be installed through pip3
+ - All files in `/var/log/nginx` should be readable by the ssh user, if not, look at [this](https://serverfault.com/a/643279/487021)
 
 Before running the script there are several variables that need to be filled out
 in `userDetails.py` in order for it to work. The bookstack sql password can be
