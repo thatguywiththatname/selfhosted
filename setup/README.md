@@ -52,9 +52,10 @@ Simply execute this script and selfhosted-webserver will setup
 Vist [Let's Encrypt](https://letsencrypt.org/) and follow their getting started
 guide for nginx on ubuntu, it should do everything automatically
 
-Now the https certificate(s) need to be automatically renewed, to do this create
-a cron task to run `certbot renew` (or `certbot-auto renew`, depending on what
-you installed) every day at a random time
+Following the guide should install a version of `certbot`, which should
+set up something (either a cron job or a systemd timer) to automatically run the
+renew command every 12 hours. Check these 2 things to see if one of them have
+been set up, if not, set up your own
 
 ## UFW / firewall
 
