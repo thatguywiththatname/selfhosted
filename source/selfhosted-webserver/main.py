@@ -1,8 +1,9 @@
-from flask import Flask, render_template, redirect
+from flask import Flask, redirect
 
 app = Flask(__name__)
 app.config["SERVER_NAME"] = "simonjenner.gq"
 
 @app.route("/")
 def mainpage():
-    return render_template("index.html")
+    # Redirect to my Github page
+    return redirect("https://github.com/thatguywiththatname", code=302)
