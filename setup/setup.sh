@@ -19,7 +19,6 @@ sudo cp -R /opt/selfhosted/setup/services/nginx/. /etc/nginx/sites-available/.
 
 # Link nginx sites to be enabled
 sudo ln -s /etc/nginx/sites-available/selfhosted-webserver /etc/nginx/sites-enabled
-sudo ln -s /etc/nginx/sites-available/bookstack /etc/nginx/sites-enabled
 
 # Start services
 sudo systemctl daemon-reload

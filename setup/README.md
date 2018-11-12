@@ -5,7 +5,6 @@
 This guide will install:
  - Required dependencies through apt and pip
  - selfhosted-webserver
- - BookStack
 
 ## Requirements
 
@@ -24,22 +23,6 @@ $ wget https://bootstrap.pypa.io/get-pip.py
 $ sudo python3 get-pip.py
 $ rm get-pip.py
 ```
-
-## BookStack
-
-Go [here](https://www.bookstackapp.com/docs/admin/installation/#ubuntu-1804) and
-follow the installation instructions
-
-Once this is done, we want to remove apache2 and replcae it with nginx. To do
-this, run these commands:
-
- - `sudo apt remove apache2 --purge`
- - `sudo apt autoremove`
- - `sudo apt remove apache2.*`
-
-This should completely nuke apache from your system
-
-BookStacks nginx file(s) will be created when `setup.sh` is run later
 
 ## selfhosted-webserver
 

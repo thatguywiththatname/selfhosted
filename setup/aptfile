@@ -2,4 +2,3 @@ nginx
 python3-distutils
 python3-dev
 fail2ban
-gcc

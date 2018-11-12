@@ -7,7 +7,7 @@ After=network-online.target
 [Service]
 User=selfhosted
 Group=www-data
-WorkingDirectory=/opt/selfhosted/source/selfhosted-webserver
+WorkingDirectory=/opt/selfhosted/selfhosted-webserver
 ExecStart=/usr/local/bin/uwsgi --ini selfhosted-webserver.ini
 Restart=always
 RestartSec=10
