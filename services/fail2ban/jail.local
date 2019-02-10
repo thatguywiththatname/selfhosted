@@ -1,0 +1,37 @@
+# Move to /etc/fail2ban/jail.local
+
+# DEFAULT is a global definition. Options can be overridden in other jails afterwards
+[DEFAULT]
+
+# Ignore local traffic
+ignoreip = 127.0.0.0/8 
+
+# Email me with alerts
+destemail = simjenner3@gmail.com
+sendername = Fail2Ban@selfhosted
+mta = sendmail
+
+# When an IP is banned, send email with info
+action = %(action_mwl)s
+
+# Ban IPs for 1 day
+bantime  = 1d
+
+# A host is banned if it has generated "maxretry" during the last "findtime" seconds
+findtime  = 10m
+
+# Number of failiures before a host gets banned
+maxretry = 5
+
+# Enable SSH monitoring
+[sshd]
+enabled = true
+port = ssh
+logpath = %(sshd_log)s
+maxretry = 5
+
+# Enable NGINX monitoring
+[nginx-http-auth]
+enabled = true
+port    = http,https
+logpath = %(nginx_error_log)s
