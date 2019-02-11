@@ -36,6 +36,7 @@ sudo service nginx reload
 echo ""
 echo "General setup done"
 echo "Double check now that the NGINX config is working for HTTP"
+# TODO: Why does this read get ignored? (only happens if certbot is after)
 read -p "Press enter to run certbot setup for NGINX"
 sudo certbot --nginx
 
