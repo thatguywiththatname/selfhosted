@@ -18,6 +18,9 @@ sudo ufw allow ssh
 sudo ufw allow "Nginx HTTPS"
 sudo ufw enable
 
+# Lock root login for security
+sudo passwd -l root
+
 # Move service files to correct locations
 sudo cp -R /opt/selfhosted/services/fail2ban/. /etc/fail2ban/.
 sudo cp -R /opt/selfhosted/services/nginx/. /etc/nginx/sites-available/.
@@ -25,22 +28,16 @@ sudo cp -R /opt/selfhosted/services/nginx/. /etc/nginx/sites-available/.
 # Link nginx sites to be enabled
 sudo ln -s /etc/nginx/sites-available/selfhosted-webserver /etc/nginx/sites-enabled
 
-# Reload configs, enable everything and (re)start fail2ban
-sudo systemctl daemon-reload
-sudo systemctl enable fail2ban
-sudo systemctl enable nginx
+# Restart fail2ban so it uses new config
 sudo systemctl restart fail2ban
+
+# Reload nginx configs
+sudo service nginx reload
 
 echo ""
 echo "General setup done"
 echo "Now running certbot setup for NGINX"
 read -p "Press enter to continue"
 sudo certbot --nginx
-
-# (re)start NGINX now certbot has done its thing
-sudo systemctl restart nginx
-
-# Lock root login for security
-sudo passwd -l root
 
 echo "- - - Done - - -"
