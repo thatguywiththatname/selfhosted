@@ -12,6 +12,12 @@ Clone this repo to `/opt` and then run `setup.sh` and it will:
 - Setup UFW for the current config
 - Walk you through setting up HTTPS for my NGINX config
 
+## Digital Ocean
+
+If running on a Digital Ocean Droplet, install DigitalOcean Agent for better metrics:
+
+`curl -L https://agent.digitalocean.com/install.sh | sudo bash`
+
 ## HTTPS
 
 Certbot comes with a cron job that will renew the HTTPS certificates automatically
