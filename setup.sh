@@ -13,7 +13,7 @@ sudo apt-get install certbot python-certbot-nginx -y
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
 sudo ufw allow ssh
-# Only allows HTTPS, not HTTP
+sudo ufw allow "Nginx HTTP"
 sudo ufw allow "Nginx HTTPS"
 sudo ufw enable
 
@@ -35,8 +35,11 @@ sudo service nginx reload
 
 echo ""
 echo "General setup done"
-echo "Double check now that the NGINX config is working"
+echo "Double check now that the NGINX config is working for HTTP"
 read -p "Press enter to run certbot setup for NGINX"
 sudo certbot --nginx
+
+# Once certbot has setup HTTPS, don't allow unsecure connections
+sudo ufw deny "Nginx HTTP"
 
 echo "- - - Done - - -"
