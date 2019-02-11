@@ -6,14 +6,6 @@
 # Ignore local traffic
 ignoreip = 127.0.0.0/8 
 
-# Email me with alerts
-destemail = simjenner3@gmail.com
-sendername = Fail2Ban@selfhosted
-mta = sendmail
-
-# When an IP is banned, send email with info
-action = %(action_mwl)s
-
 # Ban IPs for 1 day
 bantime  = 1d
 

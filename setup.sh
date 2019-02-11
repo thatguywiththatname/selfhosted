@@ -1,12 +1,11 @@
 # Install everything needed from apt
 sudo apt update
 sudo apt upgrade -y
-sudo apt install nginx fail2ban sendmail ufw -y
+sudo apt install nginx fail2ban software-properties-common -y
 
 # Install certbot
-sudo apt-get install software-properties-common -y
-sudo add-apt-repository universe
-sudo add-apt-repository ppa:certbot/certbot
+sudo add-apt-repository universe -y
+sudo add-apt-repository ppa:certbot/certbot -y
 sudo apt-get update
 sudo apt-get install certbot python-certbot-nginx -y
 
