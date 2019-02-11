@@ -5,7 +5,7 @@ My personal server configuration, currently setup to run on [simonjenner.me](htt
 Redirection is done through NGINX and not through the DNS so that in the future I can
 quickly switch it over to something different (e.g. A Django server)
 
-Clone this repo to your home directory:
+Clone this repo to your home directory (should work anywhere):
 
 ```bash
 cd ~

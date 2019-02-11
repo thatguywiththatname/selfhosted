@@ -21,8 +21,8 @@ sudo ufw enable
 sudo passwd -l root
 
 # Move service files to correct locations
-sudo cp -R ~/selfhosted/services/fail2ban/. /etc/fail2ban/.
-sudo cp -R ~/selfhosted/services/nginx/. /etc/nginx/sites-available/.
+sudo cp -R services/fail2ban/. /etc/fail2ban/.
+sudo cp -R services/nginx/. /etc/nginx/sites-available/.
 
 # Link nginx sites to be enabled
 sudo ln -s /etc/nginx/sites-available/selfhosted-webserver /etc/nginx/sites-enabled
