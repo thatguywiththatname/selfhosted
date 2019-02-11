@@ -14,3 +14,16 @@ Clone this repo to `/opt` and then run `setup.sh` and it will:
 ## HTTPS
 
 Certbot comes with a cron job that will renew the HTTPS certificates automatically
+
+## Not done in setup.sh - securing root & changing SSH port
+
+Disable root login:
+- `sudo passwd -l root`
+
+Change SSH port:
+- Open `/etc/ssh/sshd_config`
+- Find "# Port 22", un-comment it and change the number to your desired SSH port
+- Make sure to allow the new port in your firewall, e.g. `sudo ufw allow $sshport/tcp`
+- Restart the ssh service, `sudo systemctl restart sshd`
+- Reconnect and test the new port is working properly
+- Deny the default SSH port in your firewall once you confirm the new port is working
