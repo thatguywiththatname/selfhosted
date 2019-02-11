@@ -40,4 +40,7 @@ sudo certbot --nginx
 # (re)start NGINX now certbot has done its thing
 sudo systemctl restart nginx
 
+# Lock root login for security
+sudo passwd -l root
+
 echo "- - - Done - - -"
