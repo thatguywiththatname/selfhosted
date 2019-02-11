@@ -35,8 +35,8 @@ sudo service nginx reload
 
 echo ""
 echo "General setup done"
-echo "Now running certbot setup for NGINX"
-read -p "Press enter to continue"
+echo "Double check now that the NGINX config is working"
+read -p "Press enter to run certbot setup for NGINX"
 sudo certbot --nginx
 
 echo "- - - Done - - -"
