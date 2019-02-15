@@ -22,7 +22,8 @@ sudo ufw default allow outgoing
 sudo ufw allow ssh
 sudo ufw allow "Nginx HTTP"
 sudo ufw allow "Nginx HTTPS"
-sudo ufw enable
+# Automate y/n prompt
+echo "y" | sudo ufw enable
 
 # Lock root login for security
 sudo passwd -l root
@@ -60,8 +61,9 @@ Double check now that the NGINX config is working for HTTP
 
 EndOfMsg
 
-# TODO: Why does this read get ignored? (only happens if certbot is after)
-read -p "Press enter to run certbot setup for NGINX"
+# https://stackoverflow.com/a/15744486
+printf "Press enter to run certbot setup for NGINX"
+read _
 
 sudo certbot --nginx
 
