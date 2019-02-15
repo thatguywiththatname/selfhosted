@@ -12,9 +12,11 @@ Clone this repo to your home directory (although it should work anywhere):
 ```bash
 cd ~
 git clone https://github.com/thatguywiththatname/selfhosted
+cd selfhosted  # The script uses relative paths so you must run from inside the dir
 ```
 
 Then run `sudo sh setup.sh` and it will (in this order):
+- Update and upgrade through `apt`
 - Install [certbot](https://certbot.eff.org/) for nginx
 - Setup UFW for the current config
 - Lock the root login so it can't be used anymore

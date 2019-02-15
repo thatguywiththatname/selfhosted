@@ -10,7 +10,7 @@ sudo apt update
 sudo apt upgrade -y
 sudo apt install nginx fail2ban software-properties-common -y
 
-# Install certbot
+# Install certbot (software-properties-common needed)
 sudo add-apt-repository universe -y
 sudo add-apt-repository ppa:certbot/certbot -y
 sudo apt-get update
