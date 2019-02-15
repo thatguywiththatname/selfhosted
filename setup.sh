@@ -1,3 +1,10 @@
+# https://gist.github.com/lukechilds/a83e1d7127b78fef38c2914c4ececc3c
+get_latest_git_release() {
+    curl --silent "https://api.github.com/repos/$1/releases/latest" | # Get latest release from GitHub api
+        grep '"tag_name":' |                                          # Get tag line
+        sed -E 's/.*"([^"]+)".*/\1/'                                  # Pluck JSON value
+}
+
 # Install everything needed from apt
 sudo apt update
 sudo apt upgrade -y
@@ -33,13 +40,29 @@ sudo systemctl restart fail2ban
 # Reload nginx configs
 sudo service nginx reload
 
-echo ""
-echo "General setup done"
-echo "Double check now that the NGINX config is working for HTTP"
+# Download latest release of gotop to /usr/local/bin
+# Modified from https://github.com/cjbassi/gotop/blob/master/scripts/download.sh
+RELEASE=$(get_latest_git_release 'cjbassi/gotop')
+ARCHIVE=gotop_${RELEASE}_linux_amd64.tgz
+wget https://github.com/cjbassi/gotop/releases/download/${RELEASE}/${ARCHIVE}
+tar xf ${ARCHIVE}
+# https://askubuntu.com/a/308048
+sudo mv gotop /usr/local/bin
+rm ${ARCHIVE}
+
+# Install DO metrics agent
+curl -L https://agent.digitalocean.com/install.sh | sudo bash
+
+cat << EndOfMsg
+
+General setup done
+Double check now that the NGINX config is working for HTTP
+
+EndOfMsg
+
 # TODO: Why does this read get ignored? (only happens if certbot is after)
 read -p "Press enter to run certbot setup for NGINX"
-sudo certbot --nginx
 
-curl -L https://agent.digitalocean.com/install.sh | sudo bash
+sudo certbot --nginx
 
 echo "- - - Done - - -"

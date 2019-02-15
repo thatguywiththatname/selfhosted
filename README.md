@@ -1,23 +1,26 @@
 # selfhosted
 
-My personal server configuration, currently setup to run on [simonjenner.me](https://simonjenner.me)
+My personal server configuration, currently powering [simonjenner.me](https://simonjenner.me) and [SpaceX-Launch-Bot](https://github.com/r-spacex/SpaceX-Launch-Bot)
 
-Redirection is done through NGINX and not through the DNS so that in the future I can
+Redirection on [simonjenner.me](https://simonjenner.me) is done through NGINX and not through the DNS so that in the future I can
 quickly switch it over to something different (e.g. A Django server)
 
-Clone this repo to your home directory (should work anywhere):
+## Installation
+
+Clone this repo to your home directory (although it should work anywhere):
 
 ```bash
 cd ~
 git clone https://github.com/thatguywiththatname/selfhosted
 ```
 
-Then run `setup.sh` and it will (in this order):
+Then run `sudo sh setup.sh` and it will (in this order):
 - Install [certbot](https://certbot.eff.org/) for nginx
 - Setup UFW for the current config
 - Lock the root login so it can't be used anymore
-- Setup my NGINX config
 - Setup Fail2Ban
+- Setup my NGINX config
+- Install [gotop](https://github.com/cjbassi/gotop)
 - Run certbot for NGINX config
 - Install Digital Oceans [Agent](https://github.com/digitalocean/do-agent) for Droplet metrics
 
