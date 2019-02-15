@@ -32,6 +32,14 @@ Once this is done you can delete the selfhosted directory:
 rm -rf ~/selfhosted
 ```
 
+## Update
+
+To update installed binaries (currently just gotop)
+
+```bash
+sudo sh update.sh
+```
+
 ## HTTPS
 
 "Certbot comes with a cron job that will renew the HTTPS certificates automatically"

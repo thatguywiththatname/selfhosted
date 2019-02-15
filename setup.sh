@@ -45,7 +45,7 @@ sudo service nginx reload
 # Modified from https://github.com/cjbassi/gotop/blob/master/scripts/download.sh
 RELEASE=$(get_latest_git_release 'cjbassi/gotop')
 ARCHIVE=gotop_${RELEASE}_linux_amd64.tgz
-wget https://github.com/cjbassi/gotop/releases/download/${RELEASE}/${ARCHIVE}
+wget -q --show-progress https://github.com/cjbassi/gotop/releases/download/${RELEASE}/${ARCHIVE}
 tar xf ${ARCHIVE}
 # https://askubuntu.com/a/308048
 sudo mv gotop /usr/local/bin
