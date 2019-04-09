@@ -10,8 +10,8 @@ bannerText="$(hostname)"
 width=60
 
 # Services to detect
-services=("apport" "broken")
-serviceNames=("Apport" "Broken")
+services=("SLB" "fail2ban" "ufw" "redis" "nginx")
+serviceNames=("SLB" "Fail2Ban" "UFW" "Redis" "NGINX")
 
 # END CONFIG
 
@@ -67,3 +67,9 @@ done
 
 # echo anything thats left
 echo -e "$line"
+
+
+# FAIL2BAN STATUS
+# PACKAGES TO BE UDPATED
+# AVAILABLE PATCHES
+# LAST LOGIN
