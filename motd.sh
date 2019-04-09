@@ -39,19 +39,19 @@ line="  "
 lineLen=2
 
 echo  # Newline
-echo "Service status:"
+echo "Services:"
 
 for i in ${!serviceStatus[@]}
 do
     if [[ "${serviceStatus[$i]}" == "active" ]]; then
-        nextStatus="\e[32m● ${serviceNames[$i]}\e[0m "
+        nextStatus="\e[32m${serviceNames[$i]} ●\e[0m  "
     else
-        nextStatus="\e[31m▲ ${serviceNames[$i]}\e[0m "
+        nextStatus="\e[31m${serviceNames[$i]} ▲\e[0m  "
     fi
 
     # Calculate "seen" chars instead of actual chars (escapes take up a lot)
-    # 3 is for status symbol + space + trailing space
-    nextStatusLen=$((3+${#serviceNames[$i]}))
+    # 4 is for space + status symbol + trailing spaces
+    nextStatusLen=$((4+${#serviceNames[$i]}))
     
     # If the current line will exceed the max column with then echo the current line
     # and start a new line
