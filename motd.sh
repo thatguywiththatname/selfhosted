@@ -1,5 +1,5 @@
 #!/bin/bash
-# REQUIREMENTS: figlet, lolcat
+# REQUIREMENTS: figlet, lolcat, fortune
 
 
 # MOTD CONFIG
@@ -24,9 +24,7 @@ figlet -f slant $bannerText | lolcat -f
 echo "Uptime: $(uptime -p | cut -d " " -f2-)"
 
 
-# SERVICES STATUS
-# Heavily modified from https://reddit.com/r/unixporn/9gbenc/
-
+# SERVICES STATUS - Heavily modified from https://reddit.com/r/unixporn/9gbenc/
 # Collect is-active statuses
 serviceStatus=()
 for service in "${services[@]}"
@@ -44,9 +42,9 @@ echo "Services:"
 for i in ${!serviceStatus[@]}
 do
     if [[ "${serviceStatus[$i]}" == "active" ]]; then
-        nextStatus="\e[32m${serviceNames[$i]} ●\e[0m  "
+        nextStatus="\e[32m● ${serviceNames[$i]}\e[0m  "
     else
-        nextStatus="\e[31m${serviceNames[$i]} ▲\e[0m  "
+        nextStatus="\e[31m▲ ${serviceNames[$i]}\e[0m  "
     fi
 
     # Calculate "seen" chars instead of actual chars (escapes take up a lot)
@@ -69,7 +67,20 @@ done
 echo -e "$line"
 
 
+# TLS CERT STATUS
+
+
 # FAIL2BAN STATUS
-# PACKAGES TO BE UDPATED
-# AVAILABLE PATCHES
+
+
+# PACKAGES TO BE UDPATED - https://askubuntu.com/a/603970/942700
+echo  # Newline
+/usr/lib/update-notifier/apt-check --human-readable
+
+
 # LAST LOGIN
+
+
+# FORTUNE - -n for <n chars
+echo  # Newline
+fortune -s -n 100
