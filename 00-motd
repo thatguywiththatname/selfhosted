@@ -17,7 +17,7 @@ serviceNames=("SLB" "Fail2Ban" "UFW" "Redis" "NGINX")
 
 
 # HOSTNAME - figlet hostname and animate with lolcat
-figlet -f slant $bannerText | lolcat -f
+/usr/bin/figlet -f slant $bannerText | /usr/games/lolcat -f
 
 
 # UPTIME - cut into fields split by " " and print the 2nd field onwards
@@ -83,4 +83,4 @@ echo  # Newline
 
 # FORTUNE - -n for <n chars
 echo  # Newline
-fortune -s -n 100
+/usr/games/fortune -s -n 100
