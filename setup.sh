@@ -8,7 +8,7 @@ get_latest_git_release() {
 # Install everything needed from apt
 sudo apt update
 sudo apt upgrade -y
-sudo apt install nginx fail2ban software-properties-common -y
+sudo apt install nginx fail2ban software-properties-common lolcat figlet fortune -y
 
 # Install certbot (software-properties-common needed)
 sudo add-apt-repository universe -y
@@ -40,6 +40,13 @@ sudo systemctl restart fail2ban
 
 # Reload nginx configs
 sudo service nginx reload
+
+# Delete old MOTD, move new MOTD files over
+sudo rm /etc/update-motd.d/*
+sudo cp motd/* /etc/update-motd.d/
+
+echo -e "\n\nForcing MOTD update\n\n"
+sudo run-parts /etc/update-motd.d/
 
 # Download latest release of gotop to /usr/local/bin
 # Modified from https://github.com/cjbassi/gotop/blob/master/scripts/download.sh

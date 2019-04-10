@@ -1,10 +1,6 @@
 #!/bin/bash
-# REQUIREMENTS: figlet, lolcat, fortune
 
-
-# MOTD CONFIG
-
-bannerText="$(hostname)"
+# CONFIG
 
 # Max chars per line for services readout
 width=60
@@ -15,16 +11,7 @@ serviceNames=("SLB" "Fail2Ban" "UFW" "Redis" "NGINX")
 
 # END CONFIG
 
-
-# HOSTNAME - figlet hostname and animate with lolcat
-/usr/bin/figlet -f slant $bannerText | /usr/games/lolcat -f
-
-
-# UPTIME - cut into fields split by " " and print the 2nd field onwards
-echo "Uptime: $(uptime -p | cut -d " " -f2-)"
-
-
-# SERVICES STATUS - Heavily modified from https://reddit.com/r/unixporn/9gbenc/
+# Heavily modified from https://reddit.com/r/unixporn/9gbenc/
 # Collect is-active statuses
 serviceStatus=()
 for service in "${services[@]}"
@@ -65,22 +52,3 @@ done
 
 # echo anything thats left
 echo -e "$line"
-
-
-# TLS CERT STATUS
-
-
-# FAIL2BAN STATUS
-
-
-# PACKAGES TO BE UDPATED - https://askubuntu.com/a/603970/942700
-echo  # Newline
-/usr/lib/update-notifier/apt-check --human-readable
-
-
-# LAST LOGIN
-
-
-# FORTUNE - -n for <n chars
-echo  # Newline
-/usr/games/fortune -s -n 100

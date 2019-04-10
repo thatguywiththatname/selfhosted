@@ -1,0 +1,9 @@
+#!/bin/bash
+# REQUIREMENTS: fortune
+
+echo  # Newline
+
+# -n for <n chars
+/usr/games/fortune -s -n 100
+
+echo  # End MOTD with newline

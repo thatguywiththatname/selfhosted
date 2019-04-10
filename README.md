@@ -22,6 +22,7 @@ Then run `sudo sh setup.sh` and it will (in this order):
 - Lock the root login so it can't be used anymore
 - Setup Fail2Ban
 - Setup my NGINX config
+- Setup custom MOTD message
 - Install [gotop](https://github.com/cjbassi/gotop)
 - Run certbot for NGINX config
 - Install Digital Oceans [Agent](https://github.com/digitalocean/do-agent) for Droplet metrics

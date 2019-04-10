@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# cut into fields split by " " and print the 2nd field onwards
+echo "Uptime: $(uptime -p | cut -d " " -f2-)"

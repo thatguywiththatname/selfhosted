@@ -1,0 +1,6 @@
+#!/bin/bash
+# REQUIREMENTS: figlet, lolcat
+
+bannerText="$(hostname)"
+
+/usr/bin/figlet -f slant $bannerText | /usr/games/lolcat -f

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+echo  # Newline
+
+# https://askubuntu.com/a/603970/942700
+/usr/lib/update-notifier/apt-check --human-readable
