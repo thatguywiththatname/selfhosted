@@ -1,21 +1,20 @@
-# selfhosted
+# simonjenner.me
 
-My personal server configuration, currently powering [simonjenner.me](https://simonjenner.me) and [SpaceX-Launch-Bot](https://github.com/r-spacex/SpaceX-Launch-Bot)
+My personal website and server configuration, currently powering [simonjenner.me](https://simonjenner.me) and [SpaceX-Launch-Bot](https://github.com/r-spacex/SpaceX-Launch-Bot)
 
-Redirection on [simonjenner.me](https://simonjenner.me) is done through NGINX and not through the DNS so that in the future I can
-quickly switch it over to something different (e.g. A Django server)
+Redirection on [simonjenner.me](https://simonjenner.me) is done through my NGINX config and not through the DNS so that in the future I can quickly switch it over to something different (e.g. A Django server)
 
 ## Installation
 
-Clone this repo to your home directory (although it should work anywhere):
-
 ```bash
 cd ~
-git clone https://github.com/thatguywiththatname/selfhosted
-cd selfhosted  # The script uses relative paths so you must run from inside the dir
+git clone https://github.com/psidex/simonjenner.me
+cd simonjenner.me
+sudo sh setup.sh
 ```
 
-Then run `sudo sh setup.sh` and it will (in this order):
+This script will:
+
 - Update and upgrade through `apt`
 - Install [certbot](https://certbot.eff.org/) for nginx
 - Setup UFW for the current config
@@ -23,29 +22,22 @@ Then run `sudo sh setup.sh` and it will (in this order):
 - Setup Fail2Ban
 - Setup my NGINX config
 - Setup custom MOTD message
-- Install [gotop](https://github.com/cjbassi/gotop)
-- Run certbot for NGINX config
-- Install Digital Oceans [Agent](https://github.com/digitalocean/do-agent) for Droplet metrics
+- Install Digital Ocean's [Agent](https://github.com/digitalocean/do-agent) for Droplet metrics
+- Run certbot for the NGINX config
 
-Once this is done you can delete the selfhosted directory:
-
-```bash
-rm -rf ~/selfhosted
-```
-
-## Update
-
-To update installed binaries (currently just gotop)
+Once this is done you can delete the simonjenner.me directory:
 
 ```bash
-sudo sh update.sh
+rm -rf ~/simonjenner.me
 ```
 
-## HTTPS
+## Notes
+
+### HTTPS
 
 "Certbot comes with a cron job that will renew the HTTPS certificates automatically"
 
-## Changing SSH port
+### Changing SSH port
 
 - Open `/etc/ssh/sshd_config`
 - Find `# Port 22`, un-comment it and change the number to your desired SSH port
