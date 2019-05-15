@@ -11,6 +11,6 @@ server {
 
     # Currently just redirects to GitHub
     location / {
-        return 301 https://github.com/thatguywiththatname;
+        return 301 https://github.com/psidex;
     }
 }
