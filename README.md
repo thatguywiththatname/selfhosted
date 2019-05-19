@@ -45,3 +45,7 @@ rm -rf ~/simonjenner.me
 - Restart the ssh service, `sudo systemctl restart sshd`
 - Reconnect and test the new port is working properly
 - Deny the default SSH port in your firewall once you confirm the new port is working
+
+### Install pip
+
+`curl https://bootstrap.pypa.io/get-pip.py | sudo python3`
