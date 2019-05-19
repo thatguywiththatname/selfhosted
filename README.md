@@ -48,4 +48,7 @@ rm -rf ~/simonjenner.me
 
 ### Install pip
 
-`curl https://bootstrap.pypa.io/get-pip.py | sudo python3`
+```bash
+sudo apt install python3-distutils
+curl https://bootstrap.pypa.io/get-pip.py | sudo python3
+```
