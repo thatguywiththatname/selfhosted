@@ -16,6 +16,7 @@ findtime  = 10m
 maxretry = 5
 
 # Enable SSH monitoring
+# TODO: Does the port need to be changed if ssh is running on a different port?
 [sshd]
 enabled = true
 port = ssh
