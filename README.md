@@ -23,9 +23,9 @@ This script will:
 - Lock the root login so it can't be used anymore
 - Setup Fail2Ban
 - Setup my NGINX config
-- Setup custom MOTD message
 - Install Digital Ocean's [Agent](https://github.com/digitalocean/do-agent) for Droplet metrics
 - Run certbot for the NGINX config
+- Setup custom MOTD message
 
 Once this is done you can delete the simonjenner.me directory:
 
@@ -54,3 +54,9 @@ rm -rf ~/simonjenner.me
 sudo apt install python3-distutils
 curl https://bootstrap.pypa.io/get-pip.py | sudo python3
 ```
+
+### Potential Issues
+
+Fail2ban not working if ssh port is changed?
+
+Automatic MOTD update in setup.sh not working fully because some of the scripts wont work until the whole of setup.sh is run?

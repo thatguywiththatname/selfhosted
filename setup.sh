@@ -34,13 +34,6 @@ sudo systemctl restart fail2ban
 # Reload nginx configs
 sudo service nginx reload
 
-# Delete old MOTD, move new MOTD files over
-sudo rm /etc/update-motd.d/*
-sudo cp motd/* /etc/update-motd.d/
-
-echo -e "\n\nForcing MOTD update\n\n"
-sudo run-parts /etc/update-motd.d/
-
 # Install DO metrics agent
 # https://www.digitalocean.com/docs/monitoring/how-to/install-agent/
 curl -sSL https://insights.nyc3.cdn.digitaloceanspaces.com/install.sh | sudo bash
@@ -57,5 +50,14 @@ printf "Press enter to run certbot setup for NGINX"
 read _
 
 sudo certbot --nginx
+
+echo "Updating MOTD"
+
+# Delete old MOTD, move new MOTD files over
+sudo rm /etc/update-motd.d/*
+sudo cp motd/* /etc/update-motd.d/
+
+echo -e "\n\nForcing MOTD update\n\n"
+sudo run-parts /etc/update-motd.d/
 
 echo "- - - Done - - -"
