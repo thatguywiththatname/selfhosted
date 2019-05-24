@@ -6,8 +6,8 @@
 width=60
 
 # Services to detect
-services=("SLB" "fail2ban" "ufw" "redis" "nginx")
-serviceNames=("SLB" "Fail2Ban" "UFW" "Redis" "NGINX")
+services=("spacexlaunchbot" "fail2ban" "ufw" "redis" "nginx")
+serviceNames=("SpaceXLaunchBot" "Fail2Ban" "UFW" "Redis" "NGINX")
 
 # END CONFIG
 
