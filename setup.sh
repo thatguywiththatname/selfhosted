@@ -53,6 +53,7 @@ sudo certbot --nginx
 
 echo "Updating MOTD"
 
+chmod +x motd/*
 # Delete old MOTD, move new MOTD files over
 sudo rm /etc/update-motd.d/*
 sudo cp motd/* /etc/update-motd.d/
