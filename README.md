@@ -1,6 +1,8 @@
 # simonjenner.me
 
-My personal website and server configuration, currently powering [simonjenner.me](https://simonjenner.me) and [SpaceX-Launch-Bot](https://github.com/r-spacex/SpaceX-Launch-Bot)
+My frontend / backend code for https://simonjenner.me
+
+The server is also currently running my instance of [SpaceX-Launch-Bot](https://github.com/r-spacex/SpaceX-Launch-Bot)
 
 Redirection on [simonjenner.me](https://simonjenner.me) is done through my NGINX config and not through the DNS so that in the future I can quickly switch it over to something different (e.g. A Django server)
 

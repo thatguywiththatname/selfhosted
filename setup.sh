@@ -42,7 +42,8 @@ echo -e "\n\nForcing MOTD update\n\n"
 sudo run-parts /etc/update-motd.d/
 
 # Install DO metrics agent
-curl -L https://agent.digitalocean.com/install.sh | sudo bash
+# https://www.digitalocean.com/docs/monitoring/how-to/install-agent/
+curl -sSL https://insights.nyc3.cdn.digitaloceanspaces.com/install.sh | sudo bash
 
 cat << EndOfMsg
 
