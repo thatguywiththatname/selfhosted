@@ -58,5 +58,3 @@ curl https://bootstrap.pypa.io/get-pip.py | sudo python3
 ### Potential Issues
 
 Fail2ban not working if ssh port is changed?
-
-Automatic MOTD update in setup.sh not working fully because some of the scripts wont work until the whole of setup.sh is run?
