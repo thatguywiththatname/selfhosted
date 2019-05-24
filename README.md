@@ -1,6 +1,6 @@
 # simonjenner.me
 
-My frontend / backend code for https://simonjenner.me
+My frontend / backend code for [simonjenner.me](https://simonjenner.me)
 
 The server is also currently running my instance of [SpaceX-Launch-Bot](https://github.com/r-spacex/SpaceX-Launch-Bot)
 
