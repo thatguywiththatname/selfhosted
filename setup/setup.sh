@@ -52,6 +52,7 @@ read _
 sudo certbot --nginx
 
 echo "Updating MOTD"
+# Done after HTTPS setup so it the ssl MOTD part will work
 
 chmod +x motd/*
 # Delete old MOTD, move new MOTD files over
