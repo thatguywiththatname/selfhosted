@@ -9,12 +9,13 @@ git clone https://github.com/psidex/simonjenner.me ~/site && cd ~/site/setup && 
 This script will:
 
 - `apt` update and upgrade
-- Installng various packages this setup depends on
+- Install various packages this setup depends on
 - Install [certbot](https://certbot.eff.org/) for nginx
 - Setup UFW for the current config
 - Lock the root login so it can't be used anymore
-- Setup my NGINX config
+- Setup [Cockpit](https://cockpit-project.org/)
 - Setup Fail2Ban
+- Setup my NGINX config
 - Install Digital Ocean's [Agent](https://github.com/digitalocean/do-agent) for Droplet metrics
 - Run certbot for the NGINX config
 - Setup custom MOTD message
