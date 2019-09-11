@@ -1,7 +1,7 @@
 # Install everything needed from apt
 sudo apt update
 sudo apt upgrade -y
-sudo apt install nginx fail2ban software-properties-common lolcat figlet fortune cockpit -y
+sudo apt install nginx fail2ban software-properties-common lolcat figlet fortune -y
 
 # Install certbot (software-properties-common needed)
 sudo add-apt-repository universe -y
@@ -24,14 +24,9 @@ sudo passwd -l root
 # Move service files to correct locations
 sudo cp -R services/fail2ban/. /etc/fail2ban/.
 sudo cp -R services/nginx/. /etc/nginx/sites-available/.
-sudo cp -R services/cockpit/. /etc/cockpit/.
 
 # Link nginx sites to be enabled
 sudo ln -s /etc/nginx/sites-available/simonjenner.me.conf /etc/nginx/sites-enabled
-sudo ln -s /etc/nginx/sites-available/cockpit.simonjenner.me.conf /etc/nginx/sites-enabled
-
-# Restart cockpit so it sees the new config
-sudo systemctl restart cockpit
 
 # Restart fail2ban so it sees the new config
 sudo systemctl restart fail2ban
