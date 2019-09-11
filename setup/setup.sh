@@ -27,6 +27,9 @@ sudo cp -R services/nginx/. /etc/nginx/sites-available/.
 
 # Link nginx sites to be enabled
 sudo ln -s /etc/nginx/sites-available/simonjenner.me.conf /etc/nginx/sites-enabled
+sudo ln -s /etc/nginx/sites-available/grafana.simonjenner.me.conf /etc/nginx/sites-enabled
+
+# TODO: Grafana auto config? Logging in for first time risk?
 
 # Restart fail2ban so it sees the new config
 sudo systemctl restart fail2ban
