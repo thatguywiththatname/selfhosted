@@ -1,7 +1,7 @@
 # Install everything needed from apt
 sudo apt update
 sudo apt upgrade -y
-sudo apt install nginx fail2ban software-properties-common lolcat figlet fortune -y
+sudo apt install nginx fail2ban software-properties-common lolcat figlet fortune cockpit -y
 
 # Install certbot (software-properties-common needed)
 sudo add-apt-repository universe -y
@@ -24,19 +24,24 @@ sudo passwd -l root
 # Move service files to correct locations
 sudo cp -R services/fail2ban/. /etc/fail2ban/.
 sudo cp -R services/nginx/. /etc/nginx/sites-available/.
+sudo cp -R services/cockpit/. /etc/cockpit/.
 
 # Link nginx sites to be enabled
 sudo ln -s /etc/nginx/sites-available/simonjenner.me.conf /etc/nginx/sites-enabled
+sudo ln -s /etc/nginx/sites-available/cockpit.simonjenner.me.conf /etc/nginx/sites-enabled
 
-# Restart fail2ban so it uses new config
+# Restart cockpit so it sees the new config
+sudo systemctl restart cockpit
+
+# Restart fail2ban so it sees the new config
 sudo systemctl restart fail2ban
 
-# Reload nginx configs
-sudo service nginx reload
+# Reload nginx
+sudo systemctl restart nginx
 
 # Install DO metrics agent
 # https://www.digitalocean.com/docs/monitoring/how-to/install-agent/
-curl -sSL https://insights.nyc3.cdn.digitaloceanspaces.com/install.sh | sudo bash
+curl -sSL https://repos.insights.digitalocean.com/install.sh | sudo bash
 
 cat << EndOfMsg
 
