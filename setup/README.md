@@ -13,7 +13,6 @@ This script will:
 - Install [certbot](https://certbot.eff.org/) for nginx
 - Setup UFW for the current config
 - Lock the root login so it can't be used anymore
-- Setup Grafana
 - Setup Fail2Ban
 - Setup my NGINX config
 - Install Digital Ocean's [Agent](https://github.com/digitalocean/do-agent) for Droplet metrics
