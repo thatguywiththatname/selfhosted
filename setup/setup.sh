@@ -1,6 +1,16 @@
 #!/usr/bin/env bash
 
 # -----------------------------------------------------------------------------
+function running_on_do() {
+    # Adapted from do-agent install script
+	# DigitalOcean embedded platform information in the DMI data.
+	read -r sys_vendor < /sys/devices/virtual/dmi/id/bios_vendor
+	if ! [ "$sys_vendor" = "DigitalOcean" ]; then
+		return 1
+	fi
+	return 0
+}
+
 # Inspired by netdata installer: /master/packaging/installer/functions.sh#L188
 TPUT_RESET="$(tput sgr 0)"
 TPUT_YELLOW="$(tput setaf 3)"
@@ -67,9 +77,12 @@ run sudo systemctl restart nginx
 
 # Install DO metrics agent
 # https://www.digitalocean.com/docs/monitoring/how-to/install-agent/
-run curl -sSL https://repos.insights.digitalocean.com/install.sh -o do-install.sh
-run sudo bash do-install.sh
-run rm do-install.sh
+if running_on_do;
+then
+    run curl -sSL https://repos.insights.digitalocean.com/install.sh -o do-install.sh
+    run sudo bash do-install.sh
+    run rm do-install.sh
+fi
 
 cat << EndOfMsg
 General setup done
@@ -90,4 +103,4 @@ run sudo cp motd/* /etc/update-motd.d/
 # Force MOTD update
 run sudo run-parts /etc/update-motd.d/
 
-printf "- - - Done - - -"
+printf "Finished"
