@@ -1,13 +1,9 @@
+#!/usr/bin/env bash
+
 # Install everything needed from apt
 sudo apt update
 sudo apt upgrade -y
-sudo apt install nginx fail2ban software-properties-common lolcat figlet fortune -y
-
-# Install certbot (software-properties-common needed)
-sudo add-apt-repository universe -y
-sudo add-apt-repository ppa:certbot/certbot -y
-sudo apt-get update
-sudo apt-get install certbot python-certbot-nginx -y
+sudo apt install ufw nginx fail2ban lolcat figlet fortune certbot python-certbot-nginx -y
 
 # Setup UFW
 sudo ufw default deny incoming
