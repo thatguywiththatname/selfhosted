@@ -60,6 +60,7 @@ run sudo ufw allow ssh
 run sudo ufw allow 80  # HTTP
 run sudo ufw allow 443 # HTTPS
 # force means it wont prompt for y/n
+# TODO: UFW not running under systemd in debian? -> Doesen't get picked up by MOTD
 run sudo ufw --force enable
 
 # Move service files to correct locations
@@ -77,8 +78,7 @@ run sudo systemctl restart nginx
 
 # Install DO metrics agent
 # https://www.digitalocean.com/docs/monitoring/how-to/install-agent/
-if running_on_do;
-then
+if running_on_do; then
     run curl -sSL https://repos.insights.digitalocean.com/install.sh -o do-install.sh
     run sudo bash do-install.sh
     run rm do-install.sh
@@ -96,6 +96,9 @@ run sudo certbot --nginx
 
 # Update MOTD after HTTPS setup so it the ssl part will work
 run chmod +x motd/*
+# Clear warranty message - done this way so run can be used to display
+run sudo rm /etc/motd
+run sudo touch /etc/motd
 # Delete old MOTD, move new MOTD files over
 run sudo rm /etc/update-motd.d/*
 run sudo cp motd/* /etc/update-motd.d/
@@ -103,4 +106,4 @@ run sudo cp motd/* /etc/update-motd.d/
 # Force MOTD update
 run sudo run-parts /etc/update-motd.d/
 
-printf "Finished"
+printf "Finished!\n"
