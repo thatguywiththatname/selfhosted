@@ -13,15 +13,14 @@ git clone https://github.com/psidex/simonjenner.me ~/apollo && cd ~/apollo/setup
 
 This script will:
 
+- Lock the root login so it can't be used anymore
 - `apt` update and upgrade
 - Install various packages this setup depends on
-- Install [certbot](https://certbot.eff.org/) for nginx
-- Setup UFW for the current config
-- Lock the root login so it can't be used anymore
-- Setup Fail2Ban
-- Setup my NGINX config
-- Install Digital Ocean's [Agent](https://github.com/digitalocean/do-agent) for Droplet metrics
-- Run certbot for the NGINX config
+- Install [certbot](https://certbot.eff.org/) for nginx & run it
+- Install & setup UFW for the current config
+- Install & Setup Fail2Ban
+- Install & Setup NGINX with the config in `services/nginx`
+- Install [do-agent](https://github.com/digitalocean/do-agent) for monitoring
 - Setup custom MOTD message
 
 ## Next Steps
