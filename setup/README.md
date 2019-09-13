@@ -8,7 +8,7 @@ This script assumes you:
 This code snippet will clone this repo to `~/apollo` and run the setup script:
 
 ```bash
-git clone https://github.com/psidex/simonjenner.me ~/apollo && cd ~/apollo/setup && sudo bash setup.sh
+git clone https://github.com/psidex/simonjenner.me ~/apollo && cd ~/apollo/setup && sudo bash setup
 ```
 
 This script will:

@@ -27,7 +27,7 @@ run() {
     printf "${TPUT_RESET}\n"
 
     # Run all arguments - * puts all arguments to this function into a single string
-    # Note: only call run on one command, piping and redirection kinda doesen't work
+    # Note: only call run on one command, piping and redirection kinda doesn't work
     $*
 
     # The ? gets the exit status of the command
