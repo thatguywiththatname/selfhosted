@@ -51,7 +51,7 @@ run sudo passwd -l root
 # Install everything needed from apt
 run sudo apt update
 run sudo apt upgrade -y
-run sudo apt install curl ufw nginx fail2ban lolcat figlet fortune certbot python-certbot-nginx -y
+run sudo apt install ufw nginx fail2ban lolcat figlet fortune certbot python-certbot-nginx -y
 
 # Setup UFW
 run sudo ufw default deny incoming
@@ -79,7 +79,7 @@ run sudo systemctl restart nginx
 # Install DO metrics agent
 # https://www.digitalocean.com/docs/monitoring/how-to/install-agent/
 if running_on_do; then
-    run curl -sSL https://repos.insights.digitalocean.com/install.sh -o do-install.sh
+    run wget https://repos.insights.digitalocean.com/install.sh -O do-install.sh
     run sudo bash do-install.sh
     run rm do-install.sh
 fi
