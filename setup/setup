@@ -69,6 +69,7 @@ run sudo cp -R services/nginx/. /etc/nginx/sites-available/.
 
 # Link nginx sites to be enabled
 run sudo ln -s /etc/nginx/sites-available/simonjenner.me.conf /etc/nginx/sites-enabled
+run sudo ln -s /etc/nginx/sites-available/chronograf.simonjenner.me.conf /etc/nginx/sites-enabled
 
 # Restart fail2ban so it sees the new config
 run sudo systemctl restart fail2ban
@@ -83,6 +84,29 @@ if running_on_do; then
     run sudo bash do-install.sh
     run rm do-install.sh
 fi
+
+# Install TIC from the TICK stack
+# https://docs.influxdata.com/
+
+# Add influx debian stuff to apt then install
+# Dependency for apt-key add
+run sudo apt install gnupg -y
+wget -qO- https://repos.influxdata.com/influxdb.key | sudo apt-key add -
+echo "deb https://repos.influxdata.com/debian buster stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
+
+run sudo apt update && sudo apt install influxdb telegraf chronograf -y
+
+# TODO: Config for influxdb and telegraf
+echo "PORT=8882" | sudo tee /etc/default/chronograf
+
+run sudo systemctl enable influxdb
+run sudo systemctl enable telegraf
+run sudo systemctl enable chronograf
+
+# Restart if the service is already runnning
+run sudo systemctl restart influxdb
+run sudo systemctl restart telegraf
+run sudo systemctl restart chronograf
 
 cat << EndOfMsg
 General setup done

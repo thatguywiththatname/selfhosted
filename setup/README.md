@@ -20,6 +20,7 @@ This script will:
 - Install & setup UFW for the current config
 - Install & Setup Fail2Ban
 - Install & Setup NGINX with the config in `services/nginx`
+- Install TIC from the [TICK stack](https://www.influxdata.com/time-series-platform/): InfluxDB, Telegraf, and Chronograf (set to run on :8882) - This provides nice monitoring of various metrics and also for [SpaceXLaunchBot](https://github.com/r-spacex/SpaceXLaunchBot)
 - Install [do-agent](https://github.com/digitalocean/do-agent) for monitoring
 - Setup custom MOTD message
 
