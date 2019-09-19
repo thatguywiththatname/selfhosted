@@ -66,6 +66,8 @@ run sudo ufw allow 80  # HTTP
 run sudo ufw allow 443 # HTTPS
 # force means it wont prompt for y/n
 run sudo ufw --force enable
+# Force it to run through systemd
+run sudo systemctl restart ufw
 
 # Move service files to correct locations
 run sudo cp -R services/fail2ban/. /etc/fail2ban/.
