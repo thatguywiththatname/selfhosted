@@ -15,6 +15,7 @@ This script will:
 
 - Lock the root login so it can't be used anymore
 - `apt` update and upgrade
+- Setup the user "simon" for Apache / NGINX
 - Install various packages this setup depends on
 - Install [certbot](https://certbot.eff.org/) for nginx & run it
 - Install & setup UFW for the current config
