@@ -100,8 +100,11 @@ echo "deb https://repos.influxdata.com/debian buster stable" | sudo tee /etc/apt
 
 run sudo apt update && sudo apt install influxdb telegraf chronograf -y
 
-# TODO: Config for influxdb and telegraf
+# Config for Chronograf
 echo -e "HOST=127.0.0.1\nPORT=8882" | sudo tee /etc/default/chronograf
+
+# Move Telegraf config
+run sudo cp -R services/telegraf/. /etc/telegraf/.
 
 run sudo systemctl enable influxdb
 run sudo systemctl enable telegraf
@@ -111,9 +114,6 @@ run sudo systemctl enable chronograf
 run sudo systemctl restart influxdb
 run sudo systemctl restart telegraf
 run sudo systemctl restart chronograf
-
-# Move config
-run sudo cp -R services/telegraf/. /etc/telegraf/.
 
 cat << EndOfMsg
 General setup done
