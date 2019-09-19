@@ -6,8 +6,8 @@
 width=60
 
 # Services to detect
-services=("spacexlaunchbot" "fail2ban" "ufw" "redis" "nginx")
-serviceNames=("SpaceXLaunchBot" "Fail2Ban" "UFW" "Redis" "NGINX")
+services=("spacexlaunchbot" "chronograf" "telegraf" "influxd" "redis" "fail2ban" "ufw" "nginx")
+serviceNames=("SpaceXLaunchBot" "Chronograf" "Telegraf" "InfluxDB" "Redis" "Fail2Ban" "UFW" "NGINX")
 
 # END CONFIG
 
