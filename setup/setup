@@ -65,13 +65,11 @@ run sudo ufw allow ssh
 run sudo ufw allow 80  # HTTP
 run sudo ufw allow 443 # HTTPS
 # force means it wont prompt for y/n
-# TODO: UFW not running under systemd in debian? -> Doesen't get picked up by MOTD
 run sudo ufw --force enable
 
 # Move service files to correct locations
 run sudo cp -R services/fail2ban/. /etc/fail2ban/.
 run sudo cp -R services/nginx/. /etc/nginx/sites-available/.
-run sudo cp -R services/telegraf/. /etc/telegraf/.
 
 # Link nginx sites to be enabled
 run sudo ln -s /etc/nginx/sites-available/simonjenner.me.conf /etc/nginx/sites-enabled
@@ -113,6 +111,9 @@ run sudo systemctl enable chronograf
 run sudo systemctl restart influxdb
 run sudo systemctl restart telegraf
 run sudo systemctl restart chronograf
+
+# Move config
+run sudo cp -R services/telegraf/. /etc/telegraf/.
 
 cat << EndOfMsg
 General setup done
