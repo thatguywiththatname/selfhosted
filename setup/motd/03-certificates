@@ -1,6 +1,0 @@
-#!/bin/bash
-
-echo  # Newline
-
-echo "Certificates:"
-echo "  simonjenner.me :" $(/usr/bin/openssl x509 -enddate -noout -in "/etc/letsencrypt/live/simonjenner.me/cert.pem" | cut -d "=" -f 2)

@@ -1,142 +1,59 @@
 #!/usr/bin/env bash
 
-# -----------------------------------------------------------------------------
-function running_on_do() {
-    # Adapted from do-agent install script
-	# DigitalOcean embedded platform information in the DMI data.
-	read -r sys_vendor < /sys/devices/virtual/dmi/id/bios_vendor
-	if ! [ "$sys_vendor" = "DigitalOcean" ]; then
-		return 1
-	fi
-	return 0
-}
+sudo passwd -l root
 
-# Inspired by netdata installer: /master/packaging/installer/functions.sh#L188
-TPUT_RESET="$(tput sgr 0)"
-TPUT_YELLOW="$(tput setaf 3)"
-TPUT_WHITE="$(tput setaf 7)"
-TPUT_BGRED="$(tput setab 1)"
-TPUT_BGGREEN="$(tput setab 2)"
-TPUT_BOLD="$(tput bold)"
-TPUT_DIM="$(tput dim)"
+sudo apt update
+sudo apt upgrade -y
+sudo apt install ufw lolcat figlet fortune -y
 
-run() {
-    location="[${TPUT_DIM}${PWD}${TPUT_RESET}]$ "
-    printf "${location}${TPUT_BOLD}${TPUT_YELLOW}"
-    printf "$*"
-    printf "${TPUT_RESET}\n"
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow ssh
+sudo ufw allow 80
+sudo ufw allow 443
+sudo ufw --force enable
+sudo systemctl restart ufw
 
-    # Run all arguments - * puts all arguments to this function into a single string
-    # Note: only call run on one command, piping and redirection kinda doesn't work
-    $*
+# Clear warranty message.
+sudo rm /etc/motd && do touch /etc/mot
 
-    # The ? gets the exit status of the command
-    ret=$?
-
-	if [ ${ret} -ne 0 ]; then
-		# FAILED
-        printf "${TPUT_BGRED}${TPUT_WHITE}${TPUT_BOLD} FAILED ${TPUT_RESET} \n\n"
-	else
-        # OK
-		printf "${TPUT_BGGREEN}${TPUT_WHITE}${TPUT_BOLD} OK ${TPUT_RESET} \n\n"
-	fi
-
-	return $ret
-}
-# -----------------------------------------------------------------------------
-
-# Lock root login for security
-run sudo passwd -l root
-
-# Install everything needed from apt
-run sudo apt update
-run sudo apt upgrade -y
-run sudo apt install ufw nginx fail2ban lolcat figlet fortune apache2-utils certbot python-certbot-nginx -y
-
-# Setup NGINX user(s)
-printf "Press enter to create the \"simon\" user for NGINX\n"
-read _
-run sudo htpasswd -c /etc/apache2/.htpasswd simon
-
-# Setup UFW
-run sudo ufw default deny incoming
-run sudo ufw default allow outgoing
-run sudo ufw allow ssh
-run sudo ufw allow 80  # HTTP
-run sudo ufw allow 443 # HTTPS
-# force means it wont prompt for y/n
-run sudo ufw --force enable
-# Force it to run through systemd
-run sudo systemctl restart ufw
-
-# Move service files to correct locations
-run sudo cp -R services/fail2ban/. /etc/fail2ban/.
-run sudo cp -R services/nginx/. /etc/nginx/sites-available/.
-
-# Link nginx sites to be enabled
-run sudo ln -s /etc/nginx/sites-available/simonjenner.me.conf /etc/nginx/sites-enabled
-run sudo ln -s /etc/nginx/sites-available/chronograf.simonjenner.me.conf /etc/nginx/sites-enabled
-
-# Restart fail2ban so it sees the new config
-run sudo systemctl restart fail2ban
-
-# Reload nginx
-run sudo systemctl restart nginx
-
-# Install DO metrics agent
-# https://www.digitalocean.com/docs/monitoring/how-to/install-agent/
-if running_on_do; then
-    run wget https://repos.insights.digitalocean.com/install.sh -O do-install.sh
-    run sudo bash do-install.sh
-    run rm do-install.sh
-fi
-
-# Install TIC from the TICK stack
-# https://docs.influxdata.com/
-
-# Add influx debian stuff to apt then install
-# Dependency for apt-key add
-run sudo apt install gnupg -y
-wget -qO- https://repos.influxdata.com/influxdb.key | sudo apt-key add -
-echo "deb https://repos.influxdata.com/debian buster stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
-
-run sudo apt update && sudo apt install influxdb telegraf chronograf -y
-
-# Config for Chronograf
-echo -e "HOST=127.0.0.1\nPORT=8882" | sudo tee /etc/default/chronograf
-
-# Move Telegraf config
-run sudo cp -R services/telegraf/. /etc/telegraf/.
-
-run sudo systemctl enable influxdb
-run sudo systemctl enable telegraf
-run sudo systemctl enable chronograf
-
-# Restart if the service is already runnning
-run sudo systemctl restart influxdb
-run sudo systemctl restart telegraf
-run sudo systemctl restart chronograf
-
-cat << EndOfMsg
-General setup done
-Double check now that the NGINX config is working for HTTP
-EndOfMsg
-
-# https://stackoverflow.com/a/15744486
-printf "Press enter to run certbot setup for NGINX\n"
-read _
-run sudo certbot --nginx
-
-# Update MOTD after HTTPS setup so it the ssl part will work
-run chmod +x motd/*
-# Clear warranty message - done this way so run can be used to display
-run sudo rm /etc/motd
-run sudo touch /etc/motd
-# Delete old MOTD, move new MOTD files over
-run sudo rm /etc/update-motd.d/*
-run sudo cp motd/* /etc/update-motd.d/
+chmod +x motd/*
+sudo rm /etc/update-motd.d/*
+sudo cp motd/* /etc/update-motd.d/
 
 # Force MOTD update
-run sudo run-parts /etc/update-motd.d/
+sudo run-parts /etc/update-motd.d/
 
-printf "Finished!\n"
+# Docker setup
+
+sudo apt-get install \
+    apt-transport-https ca-certificates curl gnupg2 software-properties-common -y
+
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
+
+sudo apt update
+sudo apt install docker-ce docker-ce-cli containerd.io -y
+
+# Portainer
+sudo docker volume create portainer_data
+sudo docker run -d --name=portainer --restart=always \
+    -p 8000:8000 -p 9000:9000 \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v portainer_data:/data \
+    portainer/portainer
+
+# Fail2Ban
+sudo docker run -d --name fail2ban --restart always \
+  --network host \
+  --cap-add NET_ADMIN \
+  --cap-add NET_RAW \
+  -v $(pwd)/data:/data \
+  -v /var/log:/var/log:ro \
+  crazymax/fail2ban:latest
+
+# End Docker setup
+
+echo "Setup done"

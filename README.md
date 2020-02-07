@@ -3,9 +3,10 @@
 (Front|Back)end code for my personal server + website
 
 Server Stack:
-- Digital Ocean hosting + do-agent for monitoring
+- Hetzner CX11 Server
 - Debian 10 minimal
-- NGINX as a web server & reverse proxy
-- Let's Encrypt + Certbot for HTTPS
-- UFW for firewall management
-- Fail2ban for security
+- UFW
+- Docker
+  - Fail2ban
+  - NGINX
+    - Certbot + Let's Encrypt
