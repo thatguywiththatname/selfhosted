@@ -15,7 +15,7 @@ sudo ufw --force enable
 sudo systemctl restart ufw
 
 # Clear warranty message.
-sudo rm /etc/motd && do touch /etc/mot
+sudo rm /etc/motd && touch /etc/mot
 
 chmod +x motd/*
 sudo rm /etc/update-motd.d/*
