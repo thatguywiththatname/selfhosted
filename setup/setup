@@ -4,7 +4,7 @@ sudo passwd -l root
 
 sudo apt update
 sudo apt upgrade -y
-sudo apt install ufw lolcat figlet fortune -y
+sudo apt install ufw fail2ban lolcat figlet fortune -y
 
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
@@ -13,6 +13,9 @@ sudo ufw allow 80
 sudo ufw allow 443
 sudo ufw --force enable
 sudo systemctl restart ufw
+
+sudo cp ./jail.local /etc/fail2ban/jail.local
+sudo systemctl restart fail2ban
 
 # Clear warranty message.
 sudo rm /etc/motd && touch /etc/mot
@@ -32,28 +35,22 @@ sudo apt-get install \
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
 
 sudo add-apt-repository \
-   "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
+    "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
 
 sudo apt update
 sudo apt install docker-ce docker-ce-cli containerd.io -y
 
-# Portainer
-sudo docker volume create portainer_data
-sudo docker run -d --name=portainer --restart=always \
-    -p 8000:8000 -p 9000:9000 \
-    -v /var/run/docker.sock:/var/run/docker.sock \
-    -v portainer_data:/data \
-    portainer/portainer
+# Install Docker Compose.
+sudo curl -L "https://github.com/docker/compose/releases/download/1.25.3/docker-compose-$(uname -s)-$(uname -m)" \
+    -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
 
-# Fail2Ban
-sudo docker run -d --name fail2ban --restart always \
-  --network host \
-  --cap-add NET_ADMIN \
-  --cap-add NET_RAW \
-  -v $(pwd)/data:/data \
-  -v /var/log:/var/log:ro \
-  crazymax/fail2ban:latest
+# Current user can run docker commands without sudo after re-log.
+sudo groupadd docker
+sudo usermod -aG docker $USER
 
 # End Docker setup
+
+sudo docker-compose up -d
 
 echo "Setup done"

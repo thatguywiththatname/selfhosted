@@ -1,0 +1,59 @@
+version: "3"
+
+services:
+  portainer:
+    image: portainer/portainer
+    restart: always
+    container_name: portainer
+    networks:
+      - web
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nginx-web.rule=Host(`pt.simonj.tech`)"
+      - "traefik.http.routers.nginx-web.entrypoints=web"
+      - "traefik.http.routers.nginx-web.middlewares=redirect@file"
+      - "traefik.http.routers.nginx-secured.rule=Host(`pt.simonj.tech`)"
+      - "traefik.http.routers.nginx-secured.entrypoints=websecure"
+      - "traefik.http.routers.nginx-secured.tls.certresolver=le"
+
+  traefik:
+    image: traefik:v2.0
+    restart: always
+    container_name: traefik
+    networks:
+      - web
+    ports:
+      - 80:80
+      - 443:443
+    command:
+      - --api.dashboard=true
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --providers.docker.network=web
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+      # https://docs.traefik.io/https/acme/#configuration-examples
+      - --certificatesResolvers.le.acme.email=simjenner3@gmail.com
+      - --certificatesResolvers.le.acme.storage=acme.json
+      - --certificatesResolvers.le.acme.httpChallenge.entryPoint=web
+      - --certificatesResolvers.le.acme.dnsChallenge.provider=digitalocean
+    volumes:
+      - /etc/letsencrypt:/letsencrypt
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/lib/traefik:/users # Put users file here
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.api.rule=Host(`tr.simonj.tech`)"
+      - "traefik.http.routers.api.service=api@internal"
+      - "traefik.http.routers.api.middlewares=auth"
+      - "traefik.http.middlewares.auth.basicauth.users=test:$$apr1$$H6uskkkW$$IgXLP6ewTrSuBkTrqE8wj/,test2:$$apr1$$d9hr9HBB$$4HxwgUir3HP4EsggP/QNo0"
+      # - "traefik.http.middlewares.auth.basicauth.usersfile=/users/usersfile"
+
+networks:
+  web:
+
+volumes:
+  portainer_data:
