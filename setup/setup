@@ -4,7 +4,10 @@ sudo passwd -l root
 
 sudo apt update
 sudo apt upgrade -y
-sudo apt install ufw fail2ban lolcat figlet fortune -y
+sudo apt install ufw nginx fail2ban \
+    certbot python-certbot-nginx \
+    lolcat figlet fortune \
+    -y
 
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
@@ -16,6 +19,11 @@ sudo systemctl restart ufw
 
 sudo cp ./jail.local /etc/fail2ban/jail.local
 sudo systemctl restart fail2ban
+
+sudo cp ./nginx/*.conf /etc/nginx/conf.d/
+sudo systemctl restart nginx
+
+sudo certbot --nginx
 
 # Clear warranty message.
 sudo rm /etc/motd && touch /etc/mot

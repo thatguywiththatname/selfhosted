@@ -6,7 +6,9 @@ Server Stack:
 - Hetzner CX11 Server
 - Debian 10 minimal
 - UFW
+- Fail2ban
+- NGINX
+  - Certbot + Let's Encrypt
 - Docker
-  - Fail2ban
-  - NGINX
-    - Certbot + Let's Encrypt
+  - Portainer
+  - Anything else I want to run

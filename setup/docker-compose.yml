@@ -5,26 +5,11 @@ services:
     image: portainer/portainer
     restart: always
     container_name: portainer
-    networks:
-      - nginx_web
+    ports:
+      - 127.0.0.1:9000:9000
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data
-  
-  nginx:
-    image: nginx:alpine
-    restart: always
-    container_name: nginx
-    ports:
-      - 80:80
-      - 443:443
-    networks:
-      - nginx_web
-    volumes:
-      - /etc/nginx/conf.d:/etc/nginx/conf.d
-
-networks:
-  nginx_web:
 
 volumes:
   portainer_data:
