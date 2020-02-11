@@ -2,13 +2,13 @@
 
 sudo passwd -l root
 
+sudo timedatectl set-timezone UTC
+
 sudo apt update
 sudo apt upgrade -y
-sudo apt install ufw nginx fail2ban \
-    certbot python-certbot-nginx \
-    lolcat figlet fortune \
-    -y
+sudo apt install ufw lolcat figlet fortune -y
 
+# Warning: Docker containers ignore UFW rules.
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
 sudo ufw allow ssh
@@ -16,14 +16,6 @@ sudo ufw allow 80
 sudo ufw allow 443
 sudo ufw --force enable
 sudo systemctl restart ufw
-
-sudo cp ./jail.local /etc/fail2ban/jail.local
-sudo systemctl restart fail2ban
-
-sudo cp ./nginx/*.conf /etc/nginx/conf.d/
-sudo systemctl restart nginx
-
-sudo certbot --nginx
 
 # Clear warranty message.
 sudo rm /etc/motd && touch /etc/mot
@@ -37,7 +29,7 @@ sudo run-parts /etc/update-motd.d/
 
 # Docker setup
 
-sudo apt-get install \
+sudo apt install \
     apt-transport-https ca-certificates curl gnupg2 software-properties-common -y
 
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
@@ -58,6 +50,9 @@ sudo groupadd docker
 sudo usermod -aG docker $USER
 
 # End Docker setup
+
+sudo mkdir -p /etc/fail2ban/data/jail.d
+sudo cp ./sshd.conf /etc/fail2ban/data/jail.d
 
 sudo docker-compose up -d
 
