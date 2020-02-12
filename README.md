@@ -14,3 +14,4 @@ Server Stack:
       - [Let's Encrypt NPM Companion](https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion)
       - [Docker Web Redirect](https://hub.docker.com/r/morbz/docker-web-redirect)
       - [SpaceXLaunchBot](https://github.com/r-spacex/SpaceXLaunchBot)
+      - [Wiki.js](https://wiki.js.org/)
