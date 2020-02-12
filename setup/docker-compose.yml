@@ -35,7 +35,7 @@ services:
 
   nginx_proxy_letsencrypt:
     # https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion
-    image: jrcs/letsencrypt-nginx-proxy-companion
+    image: jrcs/letsencrypt-nginx-proxy-companion:latest
     restart: always
     container_name: nginx-proxy-letsencrypt
     depends_on:
