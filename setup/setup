@@ -51,8 +51,8 @@ sudo usermod -aG docker $USER
 
 # End Docker setup
 
-sudo mkdir -p /etc/fail2ban/data/jail.d
-sudo cp ./sshd.conf /etc/fail2ban/data/jail.d
+sudo mkdir -p /etc/fail2ban/jail.d
+sudo cp ./sshd.conf /etc/fail2ban/jail.d
 
 sudo docker-compose up -d
 

@@ -7,7 +7,7 @@ services:
     restart: always
     container_name: fail2ban
     volumes:
-      - /etc/fail2ban/data:/data
+      - /etc/fail2ban:/data
       - /var/log:/var/log:ro
     network_mode: "host"
     cap_add:
@@ -52,7 +52,7 @@ services:
 
   portainer:
     image: portainer/portainer:latest
-    restart: always
+    restart: unless-stopped
     container_name: portainer
     depends_on:
       - nginx_proxy_letsencrypt
@@ -65,7 +65,7 @@ services:
 
   redirect:
     image: morbz/docker-web-redirect:latest
-    restart: always
+    restart: unless-stopped
     container_name: github-web-redirect
     depends_on:
       - nginx_proxy_letsencrypt
@@ -73,6 +73,36 @@ services:
       - REDIRECT_TARGET=https://github.com/psidex
       - VIRTUAL_HOST=simonj.tech
       - LETSENCRYPT_HOST=simonj.tech
+  
+  wikijs_db:
+    image: postgres:11-alpine
+    restart: unless-stopped
+    container_name: postgres
+    environment:
+      - POSTGRES_DB=wiki
+      - POSTGRES_PASSWORD=wikijsrocks
+      - POSTGRES_USER=wikijs
+    logging:
+      driver: "none"
+    volumes:
+      - /var/lib/wikijs/postgresql:/var/lib/postgresql/data
+
+  wikijs:
+    image: requarks/wiki:2
+    restart: unless-stopped
+    container_name: wikijs
+    depends_on:
+      - wikijs_db
+      - nginx_proxy_letsencrypt
+    environment:
+      - DB_TYPE=postgres
+      - DB_HOST=postgres  # Name of postgres container
+      - DB_PORT=5432
+      - DB_USER=wikijs
+      - DB_PASS=wikijsrocks
+      - DB_NAME=wiki
+      - VIRTUAL_HOST=wk.simonj.tech
+      - LETSENCRYPT_HOST=wk.simonj.tech
 
 volumes:
   portainer_data:
