@@ -1,7 +1,5 @@
 version: "3"
 
-# TODO: Get nginx-proxy to redirect http traffic to https.
-
 services:
   fail2ban:
     # https://github.com/crazy-max/docker-fail2ban/tree/master/examples/jails/sshd
@@ -38,6 +36,7 @@ services:
   nginx_proxy_letsencrypt:
     # https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion
     image: jrcs/letsencrypt-nginx-proxy-companion
+    restart: always
     container_name: nginx-proxy-letsencrypt
     depends_on:
       - nginx_proxy
@@ -63,7 +62,7 @@ services:
     environment:
       - VIRTUAL_HOST=pt.simonj.tech
       - LETSENCRYPT_HOST=pt.simonj.tech
-  
+
   redirect:
     image: morbz/docker-web-redirect:latest
     restart: always
