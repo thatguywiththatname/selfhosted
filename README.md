@@ -19,5 +19,5 @@ Server Stack:
 ## Setup
 
 ```bash
-git clone https://github.com/psidex/apollo ~/apollo && cd ~/apollo/setup && sudo bash setup
+git clone https://github.com/psidex/apollo ~/apollo && cd ~/apollo && sudo bash setup
 ```
