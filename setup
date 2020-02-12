@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# This script assumes you:
+#  - Are running Debian 10
+#  - Have the `sudo` and `git` packages installed
+#  - Are running it as a normal user that is a member of the `sudo` group
+
 sudo passwd -l root
 
 sudo timedatectl set-timezone UTC
@@ -17,17 +22,13 @@ sudo ufw allow 443
 sudo ufw --force enable
 sudo systemctl restart ufw
 
-# Clear warranty message.
+# /etc/motd can contain a warranty message.
 sudo rm /etc/motd && touch /etc/mot
-
-chmod +x motd/*
+chmod +x ./motd/*
 sudo rm /etc/update-motd.d/*
-sudo cp motd/* /etc/update-motd.d/
+sudo cp ./motd/* /etc/update-motd.d/
 
-# Force MOTD update
-sudo run-parts /etc/update-motd.d/
-
-# Docker setup
+# --- Docker setup --- #
 
 sudo apt install \
     apt-transport-https ca-certificates curl gnupg2 software-properties-common -y
@@ -49,7 +50,7 @@ sudo chmod +x /usr/local/bin/docker-compose
 sudo groupadd docker
 sudo usermod -aG docker $USER
 
-# End Docker setup
+# --- End Docker setup --- #
 
 sudo mkdir -p /etc/fail2ban/jail.d
 sudo cp ./sshd.conf /etc/fail2ban/jail.d

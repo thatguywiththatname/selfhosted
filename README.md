@@ -1,4 +1,4 @@
-# apollo
+# Apollo
 
 (Front|Back)end code for my personal server + website
 
@@ -15,3 +15,9 @@ Server Stack:
       - [Docker Web Redirect](https://hub.docker.com/r/morbz/docker-web-redirect)
       - [SpaceXLaunchBot](https://github.com/r-spacex/SpaceXLaunchBot)
       - [Wiki.js](https://wiki.js.org/)
+
+## Setup
+
+```bash
+git clone https://github.com/psidex/apollo ~/apollo && cd ~/apollo/setup && sudo bash setup
+```
