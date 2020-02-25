@@ -28,7 +28,7 @@ chmod +x ./motd/*
 sudo rm /etc/update-motd.d/*
 sudo cp ./motd/* /etc/update-motd.d/
 
-# --- Docker setup --- #
+# --- Begin Docker setup --- #
 
 sudo apt install \
     apt-transport-https ca-certificates curl gnupg2 software-properties-common -y
