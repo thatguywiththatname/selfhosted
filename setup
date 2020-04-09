@@ -11,7 +11,7 @@ sudo timedatectl set-timezone UTC
 
 sudo apt update
 sudo apt upgrade -y
-sudo apt install ufw lolcat figlet fortune fortunes -y
+sudo apt install ufw lolcat figlet fortune fortunes unattended-upgrades -y
 
 # Warning: Docker containers ignore UFW rules.
 sudo ufw default deny incoming
@@ -54,3 +54,6 @@ sudo cp ./sshd.conf /etc/fail2ban/jail.d
 sudo docker-compose up -d
 
 echo "Setup done"
+
+# Rebuild (update) all images:
+# sudo docker-compose up --build -d
