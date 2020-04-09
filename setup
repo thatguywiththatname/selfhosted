@@ -5,6 +5,14 @@
 #  - Have the `sudo` and `git` packages installed
 #  - Are running it as a normal user that is a member of the `sudo` group
 
+# Pull latest versions of all images
+# sudo docker-compose pull
+# Re-build and run all containers
+# sudo docker-compose up --build -d
+
+# Remove "dangling" (currently unused) images
+# sudo docker image prune
+
 sudo passwd -l root
 
 sudo timedatectl set-timezone UTC
@@ -54,6 +62,3 @@ sudo cp ./sshd.conf /etc/fail2ban/jail.d
 sudo docker-compose up -d
 
 echo "Setup done"
-
-# Rebuild (update) all images:
-# sudo docker-compose up --build -d
