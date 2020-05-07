@@ -1,5 +1,5 @@
 tls simjenner3@gmail.com
 
 simonj.tech {
-  root /var/www
+  root /var/www/html
 }

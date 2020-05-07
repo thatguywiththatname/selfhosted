@@ -37,9 +37,14 @@ chmod +x /etc/update-motd.d/*
 
 # --- Install Caddy --- #
 
-curl https://getcaddy.com | bash -s personal
+curl https://getcaddy.com | bash -s personal.
+
+sudo mkdir -p /etc/caddy/Caddyfile
+sudo mkdir -p /var/www/html
+
 sudo cp ./caddy/Caddyfile /etc/caddy/Caddyfile
-sudo cp ./site/* /var/www/
+sudo cp ./site/* /var/www/html
+
 sudo cp ./caddy/caddy.serivce /etc/systemd/system
 
 # https://github.com/caddyserver/dist/tree/master/init
