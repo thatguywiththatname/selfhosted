@@ -9,7 +9,6 @@
 # sudo docker-compose pull
 # Re-build and run all containers
 # sudo docker-compose up --build -d
-
 # Remove "dangling" (currently unused) images
 # sudo docker image prune
 
@@ -31,10 +30,27 @@ sudo ufw --force enable
 sudo systemctl restart ufw
 
 # /etc/motd can contain a warranty message.
-sudo rm /etc/motd && touch /etc/mot
-chmod +x ./motd/*
+sudo rm /etc/motd
 sudo rm /etc/update-motd.d/*
 sudo cp ./motd/* /etc/update-motd.d/
+chmod +x /etc/update-motd.d/*
+
+# --- Install Caddy --- #
+
+curl https://getcaddy.com | bash -s personal
+sudo cp ./caddy/Caddyfile /etc/caddy/Caddyfile
+sudo cp ./site/* /var/www/
+sudo cp ./caddy/caddy.serivce /etc/systemd/system
+
+# https://github.com/caddyserver/dist/tree/master/init
+groupadd --system caddy
+useradd --system --gid caddy --create-home --home-dir /var/lib/caddy 
+    --shell /usr/sbin/nologin --comment "Caddy web server" caddy
+
+sudo systemctl enable caddy
+sudo systemctl start caddy
+
+# --- End Install Caddy --- #
 
 # --- Begin Docker setup --- #
 
@@ -50,14 +66,14 @@ sudo apt update
 sudo apt install docker-ce docker-ce-cli containerd.io -y
 
 # Install Docker Compose.
-sudo curl -L "https://github.com/docker/compose/releases/download/1.25.3/docker-compose-$(uname -s)-$(uname -m)" \
+sudo curl -L "https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)" \
     -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 
 # --- End Docker setup --- #
 
 sudo mkdir -p /etc/fail2ban/jail.d
-sudo cp ./sshd.conf /etc/fail2ban/jail.d
+sudo cp ./fail2ban/sshd.conf /etc/fail2ban/jail.d
 
 sudo docker-compose up -d
 
