@@ -45,11 +45,11 @@ sudo mkdir -p /var/www/html
 sudo cp ./caddy/Caddyfile /etc/caddy/Caddyfile
 sudo cp ./site/* /var/www/html
 
-sudo cp ./caddy/caddy.serivce /etc/systemd/system
+sudo cp ./caddy/caddy.service /etc/systemd/system
 
 # https://github.com/caddyserver/dist/tree/master/init
 groupadd --system caddy
-useradd --system --gid caddy --create-home --home-dir /var/lib/caddy 
+useradd --system --gid caddy --create-home --home-dir /var/lib/caddy \
     --shell /usr/sbin/nologin --comment "Caddy web server" caddy
 
 sudo systemctl enable caddy
