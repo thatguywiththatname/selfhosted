@@ -85,3 +85,10 @@ docker run -d --name watchtower --restart unless-stopped \
     containrrr/watchtower
 
 echo "Setup done"
+
+cp ./update-site ~
+chmod +x ~/update-site
+
+rm -rf ~/Apollo
+
+echo "Update script moved to ~ and ~/Apollo removed"

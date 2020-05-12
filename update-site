@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# Updates the static site files
+
+SITE_DIR="/etc/dockercontainerfiles/site"
+
+git clone https://github.com/psidex/Apollo ~/Apollo
+
+sudo cp -R ~/Apollo/site/. $SITE_DIR
+
+rm -rf ~/Apollo

@@ -20,6 +20,6 @@ Server Stack:
 git clone https://github.com/psidex/Apollo ~/Apollo && cd ~/Apollo && sudo bash setup
 ```
 
-All files used by docker containers are stored in `/etc/dockercontainerfiles`, such as volumes and config files.
+The setup script will remove the `~/Apollo` directory after it is run, but will leave the `update-site` script in `~`.
 
-The `Apollo` directory can be deleted after `setup` is run.
+All files used by docker containers are stored in `/etc/dockercontainerfiles`, such as volumes and config files.
