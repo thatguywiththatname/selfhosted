@@ -36,12 +36,6 @@ sudo add-apt-repository \
 sudo apt update
 sudo apt install docker-ce docker-ce-cli containerd.io -y
 
-# Docker Compose.
-sudo curl \
-    -L "https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)" \
-    -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
-
 # Where to store files and directories that containers will reference.
 CONTAINER_FILES_DIR="/etc/dockercontainerfiles"
 FAIL2BAN_DIR="${CONTAINER_FILES_DIR}/fail2ban"
@@ -85,7 +79,5 @@ docker run -d --name caddy --restart unless-stopped \
     -v "${CADDY_DIR}/data":/data \
     --network proxynet \
     caddy
-
-sudo docker-compose up -d
 
 echo "Setup done"
