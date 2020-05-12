@@ -1,4 +1,6 @@
-tls simjenner3@gmail.com
+{
+  email simjenner3@gmail.com
+}
 
 simonj.tech {
   # static-site is using gostatic which runs on 8043
