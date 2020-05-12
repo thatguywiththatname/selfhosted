@@ -1,6 +1,6 @@
 # Apollo
 
-(Front|Back)end code for my personal server + website
+(Front|Back)end code for my personal server + website.
 
 Server Stack:
 
@@ -18,3 +18,7 @@ Server Stack:
 ```bash
 git clone https://github.com/psidex/Apollo ~/Apollo && cd ~/Apollo && sudo bash setup
 ```
+
+All files used by docker images are stored in `/etc/dockercontainerfiles`.
+
+The `Apollo` directory can be deleted after `setup` is run.

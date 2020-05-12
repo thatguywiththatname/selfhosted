@@ -43,7 +43,7 @@ sudo curl \
 sudo chmod +x /usr/local/bin/docker-compose
 
 # Where to store files and directories that containers will reference.
-CONTAINER_FILES_DIR="/etc/dockersharedfiles"
+CONTAINER_FILES_DIR="/etc/dockercontainerfiles"
 FAIL2BAN_DIR="${CONTAINER_FILES_DIR}/fail2ban"
 FAIL2BAN_JAIL_DIR="${FAIL2BAN_DIR}/jail.d"
 CADDY_DIR="${CONTAINER_FILES_DIR}/caddy"
