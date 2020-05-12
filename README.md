@@ -20,6 +20,10 @@ Server Stack:
 git clone https://github.com/psidex/Apollo ~/Apollo && cd ~/Apollo && sudo bash setup
 ```
 
-The setup script will remove the `~/Apollo` directory after it is run, but will leave the `update-site` script in `~`.
+The setup script will remove the `~/Apollo` directory after it is run, but will leave
+the `update-site` script in `~`. It also installs the `unattended-upgrades` package,
+but it must be [set up](https://libre-software.net/ubuntu-automatic-updates/) afterwards
+for it to work.
 
-All files used by docker containers are stored in `/etc/dockercontainerfiles`, such as volumes and config files.
+All files used by docker containers are stored in `/etc/dockercontainerfiles`, such as
+volumes and config files.
