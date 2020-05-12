@@ -66,7 +66,7 @@ docker run -d --name fail2ban --restart always \
     -e F2B_IPTABLES_CHAIN="INPUT" \
     -e F2B_LOG_TARGET="STDOUT" \
     -e F2B_LOG_LEVEL="INFO" \
-    crazymax/fail2ban:latest
+    crazymax/fail2ban
 
 docker run -d --name static-site --restart unless-stopped \
     -v $SITE_DIR:/srv/http \
@@ -79,5 +79,9 @@ docker run -d --name caddy --restart unless-stopped \
     -v "${CADDY_DIR}/data":/data \
     --network proxynet \
     caddy
+
+docker run -d --name watchtower --restart unless-stopped \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    containrrr/watchtower
 
 echo "Setup done"
