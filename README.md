@@ -11,7 +11,7 @@ Server Stack:
       - [Caddy](https://caddyserver.com/) as a reverse proxy with https
       - [Fail2ban](https://github.com/crazy-max/docker-fail2ban)
       - [SpaceXLaunchBot](https://github.com/r-spacex/SpaceXLaunchBot)
-      - Static site running on [NGINX](https://hub.docker.com/_/nginx)
+      - [goStatic](https://github.com/PierreZ/goStatic)
 
 ## Setup
 
