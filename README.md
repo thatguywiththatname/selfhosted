@@ -12,6 +12,7 @@ Server Stack:
       - [Fail2ban](https://github.com/crazy-max/docker-fail2ban)
       - [SpaceXLaunchBot](https://github.com/r-spacex/SpaceXLaunchBot)
       - [goStatic](https://github.com/PierreZ/goStatic)
+      - [Watchtower](https://github.com/containrrr/watchtower)
 
 ## Setup
 
