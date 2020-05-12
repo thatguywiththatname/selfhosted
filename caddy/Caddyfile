@@ -1,5 +1,6 @@
 tls simjenner3@gmail.com
 
 simonj.tech {
-  root /var/www/html
+  # static-site is using gostatic which runs on 8043
+  reverse_proxy static-site:8043
 }

@@ -5,15 +5,7 @@
 #  - Have the `sudo` and `git` packages installed
 #  - Are running it as a normal user that is a member of the `sudo` group
 
-# Pull latest versions of all images
-# sudo docker-compose pull
-# Re-build and run all containers
-# sudo docker-compose up --build -d
-# Remove "dangling" (currently unused) images
-# sudo docker image prune
-
 sudo passwd -l root
-
 sudo timedatectl set-timezone UTC
 
 sudo apt update
@@ -35,50 +27,62 @@ sudo rm /etc/update-motd.d/*
 sudo cp ./motd/* /etc/update-motd.d/
 chmod +x /etc/update-motd.d/*
 
-# --- Install Caddy --- #
-
-curl https://getcaddy.com | bash -s personal.
-
-sudo mkdir -p /etc/caddy/Caddyfile
-sudo mkdir -p /var/www/html
-
-sudo cp ./caddy/Caddyfile /etc/caddy/Caddyfile
-sudo cp ./site/* /var/www/html
-
-sudo cp ./caddy/caddy.service /etc/systemd/system
-
-# https://github.com/caddyserver/dist/tree/master/init
-groupadd --system caddy
-useradd --system --gid caddy --create-home --home-dir /var/lib/caddy \
-    --shell /usr/sbin/nologin --comment "Caddy web server" caddy
-
-sudo systemctl enable caddy
-sudo systemctl start caddy
-
-# --- End Install Caddy --- #
-
-# --- Begin Docker setup --- #
-
+# Docker.
 sudo apt install \
     apt-transport-https ca-certificates curl gnupg2 software-properties-common -y
-
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
-
 sudo add-apt-repository \
     "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
-
 sudo apt update
 sudo apt install docker-ce docker-ce-cli containerd.io -y
 
-# Install Docker Compose.
-sudo curl -L "https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)" \
+# Docker Compose.
+sudo curl \
+    -L "https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)" \
     -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 
-# --- End Docker setup --- #
+# Where to store files and directories that containers will reference.
+CONTAINER_FILES_DIR="/etc/dockersharedfiles"
+FAIL2BAN_DIR="${CONTAINER_FILES_DIR}/fail2ban/jail.d"
+CADDY_DIR="${CONTAINER_FILES_DIR}/caddy"
+SITE_DIR="${CONTAINER_FILES_DIR}/site"
 
-sudo mkdir -p /etc/fail2ban/jail.d
-sudo cp ./fail2ban/sshd.conf /etc/fail2ban/jail.d
+sudo mkdir $CONTAINER_FILES_DIR
+sudo mkdir -p $FAIL2BAN_DIR
+sudo mkdir $CADDY_DIR
+sudo mkdir $SITE_DIR
+
+sudo cp -R ./fail2ban/. $FAIL2BAN_DIR
+sudo cp -R ./caddy/. $CADDY_DIR
+sudo cp -R ./site/. $SITE_DIR
+
+# A network for all apps that require reverse proxying through Caddy.
+docker network create proxynet
+
+docker run -d --name fail2ban --retart always \
+    -v $FAIL2BAN_DIR:/data \
+    -v /var/log:/var/log:ro \
+    --network=host \
+    --cap-add NET_ADMIN \
+    --cap-add NET_RAW \
+    -e TZ="UTC" \
+    -e F2B_IPTABLES_CHAIN="INPUT" \
+    -e F2B_LOG_TARGET="STDOUT" \
+    -e F2B_LOG_LEVEL="INFO" \
+    crazymax/fail2ban:latest
+
+docker run -d --name static-site --restart always \
+    -v $SITE_DIR:/srv/http \
+    --network proxynet \
+    pierrezemb/gostatic
+
+docker run -d --name caddy --restart always \
+    -p 80:80 -p 443:443 \
+    -v "${CADDY_DIR}/Caddyfile":/etc/caddy/Caddyfile \
+    -v "${CADDY_DIR}/data":/data \
+    --network proxynet \
+    caddy
 
 sudo docker-compose up -d
 
