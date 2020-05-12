@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Updates the static site files
+# Updates the static site files.
 
 SITE_DIR="/etc/dockercontainerfiles/site"
 
