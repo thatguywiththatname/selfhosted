@@ -8,11 +8,12 @@ Server Stack:
   - Debian 10 Minimal
     - [UFW](https://wiki.debian.org/Uncomplicated%20Firewall%20%28ufw%29)
     - [Docker](https://www.docker.com/)
-      - [Caddy](https://caddyserver.com/) as a reverse proxy with https
-      - [Fail2ban](https://github.com/crazy-max/docker-fail2ban)
-      - [SpaceXLaunchBot](https://github.com/r-spacex/SpaceXLaunchBot)
-      - [goStatic](https://github.com/PierreZ/goStatic)
       - [Watchtower](https://github.com/containrrr/watchtower)
+      - [Fail2ban](https://github.com/crazy-max/docker-fail2ban)
+      - [Caddy](https://caddyserver.com/) as a reverse proxy with https
+        - [goStatic](https://github.com/PierreZ/goStatic)
+          - [Hugo](https://gohugo.io/) + [Pulp](https://github.com/koirand/pulp)
+      - [SpaceXLaunchBot](https://github.com/r-spacex/SpaceXLaunchBot)
 
 ## Setup
 
