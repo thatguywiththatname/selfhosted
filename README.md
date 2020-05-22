@@ -17,7 +17,7 @@ Server Stack:
 ## Setup
 
 ```bash
-git clone https://github.com/psidex/Apollo ~/Apollo && cd ~/Apollo && sudo bash setup
+git clone --recurse-submodules https://github.com/psidex/Apollo ~/Apollo && cd ~/Apollo && sudo bash setup
 ```
 
 The setup script will remove the `~/Apollo` directory after it is run, but will leave

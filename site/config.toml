@@ -22,30 +22,23 @@ canonifyurls = true
 #     section = ["JSON", "HTML"]
 #     taxonomy = ["JSON", "HTML"]
 
-# [[menu.main]]
-#     identifier = "blog"
-#     # name = "Blog" #If display text link, cancel comment out
-#     pre = "<i class='fa fa-book-open fa-lg'></i>" #Choose your favorite font from Font Awesome
-#     url = "/blog/"
-#     weight = 10
-
 [[menu.main]]
     identifier = "twitter"
     # name = "Twitter"
     pre = "<i class='fab fa-twitter fa-lg'></i>"
     url = "https://twitter.com/psidex_"
-    weight = 20
+    weight = 10
 
 [[menu.main]]
     identifier = "github"
     # name = "GitHub"
     pre = "<i class='fab fa-github fa-lg'></i>"
     url = "https://github.com/psidex"
-    weight = 30
+    weight = 20
 
 [[menu.main]]
     identifier = "email"
     # name = "Email"
     pre = "<i class='fa fa-envelope fa-lg'></i>"
     url = "mailto:simjenner3@gmail.com"
-    weight = 40
+    weight = 30

@@ -50,9 +50,7 @@ sudo mkdir $CADDY_DIR
 sudo mkdir $SITE_DIR
 
 # Build site
-docker run --rm -it \
-  -v ./site:/src \
-  klakegg/hugo:0.71.0
+docker run --rm -it -v $(pwd)/site:/src klakegg/hugo:0.71.0
 
 sudo cp -R ./jails/. $FAIL2BAN_JAIL_DIR
 sudo cp -R ./caddy/. $CADDY_DIR
@@ -94,6 +92,6 @@ echo "Setup done"
 cp ./update-site ~
 chmod +x ~/update-site
 
-rm -rf ~/Apollo
+sudo rm -rf ~/Apollo
 
 echo "Update script moved to ~ and ~/Apollo removed"
