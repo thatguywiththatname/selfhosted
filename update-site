@@ -4,7 +4,7 @@
 
 SITE_DIR="/etc/dockercontainerfiles/site"
 
-git clone https://github.com/psidex/Apollo ~/Apollo
+git clone --recurse-submodules https://github.com/psidex/Apollo ~/Apollo
 
 sudo docker run --rm -it -v ~/Apollo/site:/src klakegg/hugo:0.71.0
 
