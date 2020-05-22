@@ -49,9 +49,14 @@ sudo mkdir $FAIL2BAN_JAIL_DIR
 sudo mkdir $CADDY_DIR
 sudo mkdir $SITE_DIR
 
+# Build site
+docker run --rm -it \
+  -v ./site:/src \
+  klakegg/hugo:0.71.0
+
 sudo cp -R ./jails/. $FAIL2BAN_JAIL_DIR
 sudo cp -R ./caddy/. $CADDY_DIR
-sudo cp -R ./site/. $SITE_DIR
+sudo cp -R ./site/public/. $SITE_DIR
 
 # A network for all apps that require reverse proxying through Caddy.
 docker network create proxynet

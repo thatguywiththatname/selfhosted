@@ -6,6 +6,10 @@ SITE_DIR="/etc/dockercontainerfiles/site"
 
 git clone https://github.com/psidex/Apollo ~/Apollo
 
-sudo cp -R ~/Apollo/site/. $SITE_DIR
+docker run --rm -it \
+  -v ~/Apollo/site:/src \
+  klakegg/hugo:0.71.0
+
+sudo cp -R ~/Apollo/site/public/. $SITE_DIR
 
 rm -rf ~/Apollo
