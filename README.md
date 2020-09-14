@@ -11,6 +11,7 @@ Server Stack:
       - [Watchtower](https://github.com/containrrr/watchtower)
       - [Fail2ban](https://github.com/crazy-max/docker-fail2ban)
       - [Caddy](https://caddyserver.com/) as a reverse proxy with https
+        - [psm](https://psm.simonj.tech)
         - [goStatic](https://github.com/PierreZ/goStatic)
           - [Hugo](https://gohugo.io/) + [Pulp](https://github.com/koirand/pulp)
       - [SpaceXLaunchBot](https://github.com/r-spacex/SpaceXLaunchBot)
@@ -28,3 +29,5 @@ for it to work.
 
 All files used by docker containers are stored in `/etc/dockercontainerfiles`, such as
 volumes and config files.
+
+If SSH port is changed, make sure to change it in the fail2ban jail as well.

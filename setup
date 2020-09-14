@@ -60,16 +60,13 @@ sudo cp -R ./site/public/. $SITE_DIR
 docker network create proxynet
 
 docker run -d --name fail2ban --restart always \
-    -v $FAIL2BAN_DIR:/data \
-    -v /var/log:/var/log:ro \
-    --network=host \
-    --cap-add NET_ADMIN \
-    --cap-add NET_RAW \
-    -e TZ="UTC" \
-    -e F2B_IPTABLES_CHAIN="INPUT" \
-    -e F2B_LOG_TARGET="STDOUT" \
-    -e F2B_LOG_LEVEL="INFO" \
-    crazymax/fail2ban
+  --network host \
+  --cap-add NET_ADMIN \
+  --cap-add NET_RAW \
+  -v $FAIL2BAN_DIR:/data \
+  -v /var/log:/var/log:ro \
+  -e F2B_LOG_LEVEL=INFO \
+  crazymax/fail2ban:latest
 
 docker run -d --name static-site --restart unless-stopped \
     -v $SITE_DIR:/srv/http \
