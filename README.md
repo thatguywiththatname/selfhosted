@@ -8,7 +8,7 @@ Server Stack:
   - Debian 10 Minimal
     - [UFW](https://wiki.debian.org/Uncomplicated%20Firewall%20%28ufw%29)
     - [Docker](https://www.docker.com/)
-      - [Watchtower](https://github.com/containrrr/watchtower)
+      - [Ouroboros](https://github.com/pyouroboros/ouroboros)
       - [Fail2ban](https://github.com/crazy-max/docker-fail2ban)
       - [Caddy](https://caddyserver.com/) as a reverse proxy with https
         - [psm](https://psm.simonj.tech)

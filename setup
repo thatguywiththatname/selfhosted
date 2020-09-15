@@ -80,9 +80,9 @@ docker run -d --name caddy --restart unless-stopped \
     --network proxynet \
     caddy
 
-docker run -d --name watchtower --restart unless-stopped \
+docker run -d --name ouroboros --restart unless-stopped \
     -v /var/run/docker.sock:/var/run/docker.sock \
-    containrrr/watchtower
+    pyouroboros/ouroboros
 
 echo "Setup done"
 
