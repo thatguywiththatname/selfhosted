@@ -10,7 +10,11 @@ sudo timedatectl set-timezone UTC
 
 sudo apt update
 sudo apt upgrade -y
-sudo apt install ufw lolcat figlet fortune fortunes unattended-upgrades -y
+sudo apt install ufw lolcat figlet fortune fortunes fail2ban unattended-upgrades -y
+
+# Fail2ban.
+sudo cp -a ./fail2ban/. /etc/fail2ban/jail.d/
+sudo systemctl restart fail2ban
 
 # Warning: Docker containers ignore UFW rules.
 sudo ufw default deny incoming
