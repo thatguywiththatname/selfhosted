@@ -3,6 +3,13 @@
 }
 
 simonj.tech {
-  # static-site is using gostatic which runs on 8043
-  reverse_proxy static-site:8043
+  reverse_proxy gostatic:8043
+}
+
+psm.simonj.tech {
+  reverse_proxy psmserver:8080
+}
+
+messenger.simonj.tech {
+  reverse_proxy msserver:8080
 }

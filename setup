@@ -21,13 +21,14 @@ sudo ufw allow 443
 sudo ufw --force enable
 sudo systemctl restart ufw
 
+# Setup MOTD.
 # /etc/motd can contain a warranty message.
 sudo rm /etc/motd
 sudo rm /etc/update-motd.d/*
 sudo cp ./motd/* /etc/update-motd.d/
 chmod +x /etc/update-motd.d/*
 
-# Docker.
+# Install Docker.
 sudo apt install \
     apt-transport-https ca-certificates curl gnupg2 software-properties-common -y
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
@@ -36,47 +37,34 @@ sudo add-apt-repository \
 sudo apt update
 sudo apt install docker-ce docker-ce-cli containerd.io -y
 
-# Where to store files and directories that containers will reference.
-CONTAINER_FILES_DIR="/etc/dockercontainerfiles"
-FAIL2BAN_DIR="${CONTAINER_FILES_DIR}/fail2ban"
-FAIL2BAN_JAIL_DIR="${FAIL2BAN_DIR}/jail.d"
-CADDY_DIR="${CONTAINER_FILES_DIR}/caddy"
-SITE_DIR="${CONTAINER_FILES_DIR}/site"
+# Build site.
+chmod +x ./updatesite
+./updatesite
 
-sudo mkdir $CONTAINER_FILES_DIR
-sudo mkdir $FAIL2BAN_DIR
-sudo mkdir $FAIL2BAN_JAIL_DIR
-sudo mkdir $CADDY_DIR
-sudo mkdir $SITE_DIR
-
-# Build site
-docker run --rm -it -v $(pwd)/site:/src klakegg/hugo:0.71.0
-
-sudo cp -R ./jails/. $FAIL2BAN_JAIL_DIR
-sudo cp -R ./caddy/. $CADDY_DIR
-sudo cp -R ./site/public/. $SITE_DIR
-
-# A network for all apps that require reverse proxying through Caddy.
+# Setup Docker stuff.
 docker network create proxynet
+docker volume create caddy
+docker volume create psmdata
 
-docker run -d --name fail2ban --restart always \
-  --network host \
-  --cap-add NET_ADMIN \
-  --cap-add NET_RAW \
-  -v $FAIL2BAN_DIR:/data \
-  -v /var/log:/var/log:ro \
-  -e F2B_LOG_LEVEL=INFO \
-  crazymax/fail2ban:latest
-
-docker run -d --name static-site --restart unless-stopped \
-    -v $SITE_DIR:/srv/http \
+# Start Docker stuff.
+docker run -d --name gostatic --restart unless-stopped \
+    -v $(pwd)/site/public:/srv/http \
     --network proxynet \
     pierrezemb/gostatic
 
+docker run -d --name psmserver \
+    --network proxynet \
+    -v psmdata:/data \
+    psidex/portsmouthshippingmovements
+
+docker run -d --name msserver \
+    --network proxynet \
+    psidex/messengerstats
+
 docker run -d --name caddy --restart unless-stopped \
     -p 80:80 -p 443:443 \
-    -v "${CADDY_DIR}/Caddyfile":/etc/caddy/Caddyfile \
-    -v "${CADDY_DIR}/data":/data \
+    -v $(pwd)/caddy/Caddyfile:/etc/caddy/Caddyfile \
+    -v caddy:/data \
     --network proxynet \
     caddy
 
@@ -85,10 +73,3 @@ docker run -d --name ouroboros --restart unless-stopped \
     pyouroboros/ouroboros
 
 echo "Setup done"
-
-cp ./update-site ~
-chmod +x ~/update-site
-
-sudo rm -rf ~/Apollo
-
-echo "Update script moved to ~ and ~/Apollo removed"
