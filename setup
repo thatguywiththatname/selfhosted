@@ -73,3 +73,11 @@ docker run -d --name ouroboros --restart unless-stopped \
     pyouroboros/ouroboros
 
 echo "Setup done"
+
+# Post Install:
+#
+# `unattended-upgrades` is installed but not setup, see the link for setup guide:
+# https://libre-software.net/ubuntu-automatic-updates/
+#
+# portsmouthshippingmovements will require a `config.json` file in it's volume and will
+# then need to be restarted
