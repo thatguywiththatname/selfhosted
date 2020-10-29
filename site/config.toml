@@ -14,7 +14,7 @@ canonifyurls = true
     publicationYear = "2020"
     # listPageDateFormat = "January, 2006" # See https://gohugo.io/functions/format/
     # singlePageDateFormat = "January 2, 2006"
-    # custom_css = ["/css/custom.css"]
+    custom_css = ["/css/custom.css"]
     # custom_js = ["/js/custom.js"]
 
 # Make sure setting a following option for search bar to work
@@ -32,25 +32,25 @@ canonifyurls = true
 [[menu.main]]
     identifier = "github"
     # name = "GitHub"
-    pre = "<img src='/img/github.svg'>"
+    pre = "<img class='home-image-link' src='/img/github.svg'>"
     url = "https://github.com/psidex"
     weight = 20
 
 [[menu.main]]
     identifier = "email"
     # name = "Email"
-    pre = "<img src='/img/mail.svg'>"
+    pre = "<img class='home-image-link' src='/img/mail.svg'>"
     url = "mailto:simjenner3@gmail.com"
     weight = 30
 
 [[menu.main]]
     identifier = "psm"
-    pre = "<img src='/img/anchor.svg'>"
+    pre = "<img class='home-image-link' src='/img/anchor.svg'>"
     url = "https://psm.simonj.tech/"
     weight = 30
 
 [[menu.main]]
     identifier = "messenger"
-    pre = "<img src='/img/message-circle.svg'>"
+    pre = "<img class='home-image-link' src='/img/message-circle.svg'>"
     url = "https://messenger.simonj.tech/"
     weight = 30
