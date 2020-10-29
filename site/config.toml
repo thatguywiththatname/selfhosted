@@ -32,13 +32,25 @@ canonifyurls = true
 [[menu.main]]
     identifier = "github"
     # name = "GitHub"
-    pre = "<i class='fab fa-github fa-lg'></i>"
+    pre = "<img src='/img/github.svg'>"
     url = "https://github.com/psidex"
     weight = 20
 
 [[menu.main]]
     identifier = "email"
     # name = "Email"
-    pre = "<i class='fa fa-envelope fa-lg'></i>"
+    pre = "<img src='/img/mail.svg'>"
     url = "mailto:simjenner3@gmail.com"
+    weight = 30
+
+[[menu.main]]
+    identifier = "psm"
+    pre = "<img src='/img/anchor.svg'>"
+    url = "https://psm.simonj.tech/"
+    weight = 30
+
+[[menu.main]]
+    identifier = "messenger"
+    pre = "<img src='/img/message-circle.svg'>"
+    url = "https://messenger.simonj.tech/"
     weight = 30
