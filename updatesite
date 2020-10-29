@@ -2,5 +2,5 @@
 
 # Updates the static site files.
 
-git pull
+git pull --recurse-submodules
 docker run --rm -it -v $(pwd)/site:/src klakegg/hugo:0.71.0

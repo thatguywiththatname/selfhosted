@@ -22,12 +22,12 @@ canonifyurls = true
 #     section = ["JSON", "HTML"]
 #     taxonomy = ["JSON", "HTML"]
 
-[[menu.main]]
-    identifier = "twitter"
-    # name = "Twitter"
-    pre = "<i class='fab fa-twitter fa-lg'></i>"
-    url = "https://twitter.com/psidex_"
-    weight = 10
+# [[menu.main]]
+#     identifier = "twitter"
+#     # name = "Twitter"
+#     pre = "<i class='fab fa-twitter fa-lg'></i>"
+#     url = "https://twitter.com/psidex_"
+#     weight = 10
 
 [[menu.main]]
     identifier = "github"
