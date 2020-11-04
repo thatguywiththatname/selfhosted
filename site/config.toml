@@ -14,7 +14,7 @@ canonifyurls = true
     publicationYear = "2020"
     # listPageDateFormat = "January, 2006" # See https://gohugo.io/functions/format/
     # singlePageDateFormat = "January 2, 2006"
-    custom_css = ["/css/custom.css"]
+    custom_css = ["/css/pulp-custom.css"]
     # custom_js = ["/js/custom.js"]
 
 # Make sure setting a following option for search bar to work
@@ -22,35 +22,30 @@ canonifyurls = true
 #     section = ["JSON", "HTML"]
 #     taxonomy = ["JSON", "HTML"]
 
-# [[menu.main]]
-#     identifier = "twitter"
-#     # name = "Twitter"
-#     pre = "<i class='fab fa-twitter fa-lg'></i>"
-#     url = "https://twitter.com/psidex_"
-#     weight = 10
-
 [[menu.main]]
     identifier = "github"
-    # name = "GitHub"
+    name = "GitHub"
     pre = "<img class='home-image-link' src='/img/github.svg'>"
     url = "https://github.com/psidex"
-    weight = 20
+    weight = 30
 
 [[menu.main]]
     identifier = "email"
-    # name = "Email"
+    name = "Email"
     pre = "<img class='home-image-link' src='/img/mail.svg'>"
     url = "mailto:simjenner3@gmail.com"
     weight = 30
 
 [[menu.main]]
-    identifier = "psm"
-    pre = "<img class='home-image-link' src='/img/anchor.svg'>"
-    url = "https://psm.simonj.tech/"
+    identifier = "keybase"
+    name = "Keybase"
+    pre = "<img class='home-image-link' src='/img/key.svg'>"
+    url = "https://keybase.io/psidex/"
     weight = 30
 
 [[menu.main]]
-    identifier = "messenger"
-    pre = "<img class='home-image-link' src='/img/message-circle.svg'>"
-    url = "https://messenger.simonj.tech/"
+    identifier = "projects"
+    name = "Projects"
+    pre = "<img class='home-image-link' src='/img/book.svg'>"
+    url = "https://simonj.tech/projects.html"
     weight = 30
