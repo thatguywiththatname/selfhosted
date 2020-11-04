@@ -1,0 +1,68 @@
+==================================================================
+https://keybase.io/psidex
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://simonj.tech
+  * I am psidex (https://keybase.io/psidex) on keybase.
+  * I have a public key with fingerprint EA86 671E 4AD6 A0B8 ADF9  B715 092D 2658 8A7F A340
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0101a2b344859dbad32706e3fe0fa66233bae967fc1715160927fd24ffb37eda20d20a",
+      "fingerprint": "ea86671e4ad6a0b8adf9b715092d26588a7fa340",
+      "host": "keybase.io",
+      "key_id": "092d26588a7fa340",
+      "kid": "0101a2b344859dbad32706e3fe0fa66233bae967fc1715160927fd24ffb37eda20d20a",
+      "uid": "9827be510d3fd223a6ff7c367cc62019",
+      "username": "psidex"
+    },
+    "service": {
+      "hostname": "simonj.tech",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "ctime": 1604531809,
+  "expire_in": 157680000,
+  "prev": "b453ca25d86e1afb0529a64fc40c655ae4930786542e4822bb9d883144747681",
+  "seqno": 3,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.1.13
+Comment: https://keybase.io/crypto
+
+yMIjAnicrVJdSBRRGF1NpTaNwgqfIif60y1n7ty5M7OFUIhlWGghPlgt987cccef
+nXV3dtXUwMiSIo3oRSqKgsgfyEoI2op+hISKwkIxIqikiMJMzDTEumP21Gv35XK/
+75xzz/n4elPmudxx0znuY7t7bTHu8f3TEZfvEsJ1HLH0Ws5bx5XT2YtW6DRs+8pN
+nfNyvMALGBARQkVSdYJ1Ecg8oqJBeQMjBESRYKoi2dAEWZAExKtANnQADYOIMtUx
+4HXAY87DGWaglIaCITNgM1mKFYRkgUKsI8wTBeuGSpgAo+sASYqCZQOLkGdEvxV2
+GMwcwWG60bRYjT18f+z9i//PviOzcqoCZEIlgddFhgIiRoYhayKSNQ0BXlAdYJiG
+AriSMnQwbOq0hmvwcKwWNTXqjNXJMdcPm5VWoGyjTTU/IwZDlm1pVgVr+G07GPY6
+RLs26CCrKfHNafiIGdDZEBkjSkNh0wpwXoEhNdt0RFkEKImCwqsejtYEzRD1mQ5C
+kpHCs+P8Q6NMkjCYhoGkK4gK2CC8BFSMoKFBXkOShClURV5WkAQBhQoAhKi6oogC
+hDJkWgLnpKoKWJxXZDZx6Wye0gC2IyHKNTy4tzfBFed2JSXGO8vlci9Y/HflsjPn
+u67DTdI4NzC5cPWV1E/Fi16t+9BTMYW7Yhu4t7W4ZU/UijW99xxYcncw3ns26WDa
+m7rJ5rXprtj3rYVt7Zmj9bE117adW1ZWtDk21te3/umJLaQ/2ueXNty5+Yucj441
+7Tx1LzFS8rCx1Z/xeWSwIxsO3zha1NbZ3Pl2R1dLlieS5749euZF+dfGQzLGPR2V
+JV8mnl89XrBvafMgzP0pkILlyUP1Ixfe+H7MDAxXB1fQIZFkva5qrUi/vOpWwsuP
+Ec/h/hThmay+c3VPJUwkNxzZH9uVdnK6eCQ1L+fR/bgned+Su7cXDmVcrGzdd6c9
+K5SvzST0y6VFuVP5oHp8pec3YCA9ew==
+=VB0J
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/psidex
+
+==================================================================
