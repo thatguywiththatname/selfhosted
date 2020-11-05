@@ -57,7 +57,7 @@ body {
     margin-right: 1em;
 }
 
-.project-image {
+.project-card > img {
     /* All project images should be 16:9, preferably 1024×576px */
     /* https://stackoverflow.com/a/46098620/6396652 */
     object-fit: cover;
@@ -66,12 +66,12 @@ body {
     border-radius: 0.5em;
 }
 
-.external-link {
+.project-card > a {
     margin-left: 0.5em;
     margin-right: 0.5em;
     text-decoration: none;
 }
 
-.external-link-img {
+.project-card > a > img {
     filter: invert(100%);
 }
