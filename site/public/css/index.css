@@ -1,0 +1,33 @@
+#centered {
+    position: absolute;
+    width: 100%;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -30%);
+}
+
+#avatarImg {
+    width: 6em;
+    border-radius: 10em;
+    border-width: 0.2em;
+    border-style: solid;
+    border-color: #2c2c2c;
+}
+
+#links {
+    margin-top: 2em;
+}
+
+#links > a {
+    display: inline-block;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+
+#links > a > p {
+    margin-top: 0;
+}
+
+#links > a > img {
+    filter: invert(100%);
+}

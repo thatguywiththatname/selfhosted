@@ -1,3 +1,0 @@
-[submodule "site/themes/pulp"]
-	path = site/themes/pulp
-	url = https://github.com/koirand/pulp.git
