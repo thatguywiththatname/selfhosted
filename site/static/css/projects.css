@@ -1,0 +1,70 @@
+* {
+    color: #8f8f8f;
+}
+
+body {
+    background-color: #101010;
+    margin: auto;
+    width: 75vw;
+
+    /* Pulp style */
+    text-align: center;
+    font-family: -apple-system,BlinkMacSystemFont,segoe ui,Helvetica,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol;
+    line-height: 1.5;
+    font-size: 16px;
+    word-wrap: break-word;
+}
+
+@media only screen and (max-width: 1000px) {
+    body {
+        width: 100vw;
+    }
+}
+
+#projects {
+    width: 100%;
+    display: inline-grid;
+    grid-template-columns: 33% 33% 33%;
+    grid-template-rows: auto;
+}
+
+@media only screen and (max-width: 800px) {
+    #projects {
+        grid-template-columns: 100%;
+    }
+}
+
+.project-card {
+    border: #8f8f8f;
+    border-width: 0.1em;
+    border-style: solid;
+    border-radius: 0.5em;
+
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-bottom: 2em;
+}
+
+.project-card > h2 {
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+}
+
+.project-card > p {
+    margin-top: 0.25em;
+    /* margin-bottom: 0.25em; */
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.project-image {
+    /* All project images should be 16:9, preferably 1024×576px */
+    /* https://stackoverflow.com/a/46098620/6396652 */
+    object-fit: cover;
+    width: 100%;
+    max-height: 10em;
+}
+
+.external-link-img {
+    filter: invert(100%);
+}
