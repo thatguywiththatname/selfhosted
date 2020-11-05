@@ -7,7 +7,7 @@ canonifyurls = true
     author = "Simon Jenner"
     avatar = "avatar.jpg"
     # avatarDescription = "My avatar description"
-    # favicon = "favicon.ico"
+    favicon = "/favicon.ico"
     description = """
         Software Engineering student at the University of Portsmouth.
     """
