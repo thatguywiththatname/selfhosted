@@ -3,6 +3,10 @@
 }
 
 simonj.tech {
+  log {
+    output file /var/log/caddy/simonj.tech.access.log
+    format single_field common_log
+  }
   reverse_proxy gostatic:8043
 }
 
