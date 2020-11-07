@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+# Show dashboard for website metrics.
+
+goaccess caddy/log/simonj.tech.access.log --log-format=COMMON

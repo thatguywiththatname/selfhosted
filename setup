@@ -8,9 +8,16 @@
 sudo passwd -l root
 sudo timedatectl set-timezone UTC
 
+# Install goaccess repo
+
+echo "deb http://deb.goaccess.io/ $(lsb_release -cs) main" | sudo tee -a /etc/apt/sources.list.d/goaccess.list
+wget -O - https://deb.goaccess.io/gnugpg.key | sudo apt-key --keyring /etc/apt/trusted.gpg.d/goaccess.gpg add -
+
+# Install everything we need from apt
+
 sudo apt update
 sudo apt upgrade -y
-sudo apt install ufw lolcat figlet fortune fortunes fail2ban unattended-upgrades -y
+sudo apt install ufw lolcat figlet fortune fortunes fail2ban goaccess unattended-upgrades -y
 
 # Fail2ban.
 sudo cp -a ./fail2ban/. /etc/fail2ban/jail.d/
