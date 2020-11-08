@@ -22,7 +22,7 @@ wget -O - https://deb.goaccess.io/gnugpg.key | sudo apt-key --keyring /etc/apt/t
 
 sudo apt update
 sudo apt upgrade -y
-sudo apt install ufw lolcat figlet fortune fortunes fail2ban goaccess unattended-upgrades -y
+sudo apt install ufw lolcat figlet fortune fortunes fail2ban goaccess jq unattended-upgrades -y
 
 # Fail2ban.
 sudo cp -a ./fail2ban/. /etc/fail2ban/jail.d/

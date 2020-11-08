@@ -1,5 +1,15 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-# Show dashboard for website metrics.
+# Script edited from https://alexmv12.xyz/blog/goaccess_caddy/
+# Takes the JSON logs, parses them, and tells GoAccess how to read them from jq.
 
-goaccess caddy/log/simonj.tech.access.log --log-format=COMMON
+goaccess <(cat ./caddy/log/simonj.tech.access.log | jq --raw-output '
+   .request.remote_addr |= .[:-6] |
+   [
+      .common_log,
+      .request.headers.Referer[0] // "-",
+      .request.headers."User-Agent"[0],
+      .duration
+   ] | @csv') \
+   --log-format='"%h - - [%d:%t %^] ""%m %r %H"" %s %b","%R","%u",%T' \
+   --time-format='%H:%M:%S' --date-format='%d/%b/%Y'
