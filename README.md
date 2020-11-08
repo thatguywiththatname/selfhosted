@@ -14,4 +14,4 @@ Server Stack:
         - [psm](https://psm.simonj.tech)
         - [messenger stats](https://messenger.simonj.tech)
         - [goStatic](https://github.com/PierreZ/goStatic) serving `site/public`
-      - [SpaceXLaunchBot](https://github.com/r-spacex/SpaceXLaunchBot) (setup not included in this repo)
+      - [SpaceXLaunchBot](https://github.com/r-spacex/SpaceXLaunchBot)
