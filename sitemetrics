@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Script edited from https://alexmv12.xyz/blog/goaccess_caddy/
 # Takes the JSON logs, parses them, and tells GoAccess how to read them from jq.
