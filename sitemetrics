@@ -1,15 +1,18 @@
 #!/usr/bin/env bash
 
-# Script edited from https://alexmv12.xyz/blog/goaccess_caddy/
-# Takes the JSON logs, parses them, and tells GoAccess how to read them from jq.
+# Script heavily edited from https://alexmv12.xyz/blog/goaccess_caddy/
 
-goaccess <(cat ./caddy/log/simonj.tech.access.log | jq --raw-output '
-   .request.remote_addr |= .[:-6] |
-   [
-      .common_log,
-      .request.headers.Referer[0] // "-",
-      .request.headers."User-Agent"[0],
-      .duration
-   ] | @csv') \
+jq --raw-output '[
+         .common_log,
+         .request.headers.Referer[0] // "-",
+         .request.headers."User-Agent"[0],
+         .duration
+   ] | @csv' \
+   ./caddy/log/*.log \
+   > everything.log
+
+goaccess everything.log \
    --log-format='"%h - - [%d:%t %^] ""%m %r %H"" %s %b","%R","%u",%T' \
    --time-format='%H:%M:%S' --date-format='%d/%b/%Y'
+
+rm everything.log

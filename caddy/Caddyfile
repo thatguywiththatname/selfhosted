@@ -10,9 +10,15 @@ simonj.tech {
 }
 
 psm.simonj.tech {
+  log {
+    output file /var/log/caddy/psm.simonj.tech.access.log
+  }
   reverse_proxy psmserver:8080
 }
 
 messenger.simonj.tech {
+  log {
+    output file /var/log/caddy/messenger.simonj.tech.access.log
+  }
   reverse_proxy msserver:8080
 }
