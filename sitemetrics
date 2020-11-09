@@ -9,10 +9,10 @@ jq --raw-output '[
          .duration
    ] | @csv' \
    ./caddy/log/*.log \
-   > everything.log
+   > ./everything.log
 
-goaccess everything.log \
+goaccess ./everything.log \
    --log-format='"%h - - [%d:%t %^] ""%m %r %H"" %s %b","%R","%u",%T' \
    --time-format='%H:%M:%S' --date-format='%d/%b/%Y'
 
-rm everything.log
+rm ./everything.log
