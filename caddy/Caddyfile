@@ -22,3 +22,10 @@ messenger.simonj.tech {
   }
   reverse_proxy msserver:8080
 }
+
+spacex.simonj.tech {
+  log {
+    output file /var/log/caddy/spacex.simonj.tech.access.log
+  }
+  reverse_proxy spacexinfo:8043
+}

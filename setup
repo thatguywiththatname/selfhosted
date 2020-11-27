@@ -73,6 +73,10 @@ docker run -d --name msserver \
     --network proxynet \
     psidex/messengerstats
 
+docker run -d --name spacexinfo --restart unless-stopped \
+    --network proxynet \
+    psidex/spacexinfo
+
 docker run -d --name caddy --restart unless-stopped \
     -p 80:80 -p 443:443 \
     -v $(pwd)/caddy/Caddyfile:/etc/caddy/Caddyfile \
@@ -81,9 +85,9 @@ docker run -d --name caddy --restart unless-stopped \
     --network proxynet \
     caddy
 
-docker run -d --name ouroboros --restart unless-stopped \
+docker run -d --name watchtower --restart unless-stopped \
     -v /var/run/docker.sock:/var/run/docker.sock \
-    pyouroboros/ouroboros
+    containrrr/watchtower
 
 echo "Setup done"
 
