@@ -73,9 +73,9 @@ docker run -d --name msserver \
     --network proxynet \
     psidex/messengerstats
 
-docker run -d --name spacexinfo --restart unless-stopped \
+docker run -d --name spacexlaunchbotsite --restart unless-stopped \
     --network proxynet \
-    psidex/spacexinfo
+   psidex/spacexlaunchbotsite
 
 docker run -d --name caddy --restart unless-stopped \
     -p 80:80 -p 443:443 \
@@ -85,8 +85,10 @@ docker run -d --name caddy --restart unless-stopped \
     --network proxynet \
     caddy
 
+# See https://github.com/containrrr/watchtower/issues/669#issuecomment-721885754
 docker run -d --name watchtower --restart unless-stopped \
     -v /var/run/docker.sock:/var/run/docker.sock \
+    -e "WATCHTOWER_POLL_INTERVAL=2160" \
     containrrr/watchtower
 
 echo "Setup done"
