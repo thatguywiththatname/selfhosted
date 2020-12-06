@@ -23,9 +23,9 @@ messenger.simonj.tech {
   reverse_proxy msserver:8080
 }
 
-slb.simonj.tech {
+spacexlaunchbot.simonj.tech {
   log {
-    output file /var/log/caddy/slb.simonj.tech.access.log
+    output file /var/log/caddy/spacexlaunchbot.simonj.tech.access.log
   }
-  reverse_proxy spacexlaunchbotsite:8043
+  reverse_proxy spacexlaunchbot-webserver:8080
 }

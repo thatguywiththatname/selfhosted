@@ -73,10 +73,6 @@ docker run -d --name msserver \
     --network proxynet \
     psidex/messengerstats
 
-docker run -d --name spacexlaunchbotsite --restart unless-stopped \
-    --network proxynet \
-   psidex/spacexlaunchbotsite
-
 docker run -d --name caddy --restart unless-stopped \
     -p 80:80 -p 443:443 \
     -v $(pwd)/caddy/Caddyfile:/etc/caddy/Caddyfile \
