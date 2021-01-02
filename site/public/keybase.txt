@@ -4,7 +4,7 @@ https://keybase.io/psidex
 
 I hereby claim:
 
-  * I am an admin of https://simonj.tech
+  * I am an admin of https://simonj.dev
   * I am psidex (https://keybase.io/psidex) on keybase.
   * I have a public key with fingerprint EA86 671E 4AD6 A0B8 ADF9  B715 092D 2658 8A7F A340
 
@@ -22,16 +22,16 @@ To do so, I am signing this object:
       "username": "psidex"
     },
     "service": {
-      "hostname": "simonj.tech",
+      "hostname": "simonj.dev",
       "protocol": "https:"
     },
     "type": "web_service_binding",
     "version": 1
   },
-  "ctime": 1604531809,
+  "ctime": 1609617206,
   "expire_in": 157680000,
-  "prev": "b453ca25d86e1afb0529a64fc40c655ae4930786542e4822bb9d883144747681",
-  "seqno": 3,
+  "prev": "40e1c7a35f85879529fc487d2e5cd65250a786840499e89af5acddf16198c73d",
+  "seqno": 7,
   "tag": "signature"
 }
 
@@ -41,23 +41,23 @@ which yields the signature:
 Version: Keybase OpenPGP v2.1.13
 Comment: https://keybase.io/crypto
 
-yMIjAnicrVJdSBRRGF1NpTaNwgqfIif60y1n7ty5M7OFUIhlWGghPlgt987cccef
-nXV3dtXUwMiSIo3oRSqKgsgfyEoI2op+hISKwkIxIqikiMJMzDTEumP21Gv35XK/
-75xzz/n4elPmudxx0znuY7t7bTHu8f3TEZfvEsJ1HLH0Ws5bx5XT2YtW6DRs+8pN
-nfNyvMALGBARQkVSdYJ1Ecg8oqJBeQMjBESRYKoi2dAEWZAExKtANnQADYOIMtUx
-4HXAY87DGWaglIaCITNgM1mKFYRkgUKsI8wTBeuGSpgAo+sASYqCZQOLkGdEvxV2
-GMwcwWG60bRYjT18f+z9i//PviOzcqoCZEIlgddFhgIiRoYhayKSNQ0BXlAdYJiG
-AriSMnQwbOq0hmvwcKwWNTXqjNXJMdcPm5VWoGyjTTU/IwZDlm1pVgVr+G07GPY6
-RLs26CCrKfHNafiIGdDZEBkjSkNh0wpwXoEhNdt0RFkEKImCwqsejtYEzRD1mQ5C
-kpHCs+P8Q6NMkjCYhoGkK4gK2CC8BFSMoKFBXkOShClURV5WkAQBhQoAhKi6oogC
-hDJkWgLnpKoKWJxXZDZx6Wye0gC2IyHKNTy4tzfBFed2JSXGO8vlci9Y/HflsjPn
-u67DTdI4NzC5cPWV1E/Fi16t+9BTMYW7Yhu4t7W4ZU/UijW99xxYcncw3ns26WDa
-m7rJ5rXprtj3rYVt7Zmj9bE117adW1ZWtDk21te3/umJLaQ/2ueXNty5+Yucj441
-7Tx1LzFS8rCx1Z/xeWSwIxsO3zha1NbZ3Pl2R1dLlieS5749euZF+dfGQzLGPR2V
-JV8mnl89XrBvafMgzP0pkILlyUP1Ixfe+H7MDAxXB1fQIZFkva5qrUi/vOpWwsuP
-Ec/h/hThmay+c3VPJUwkNxzZH9uVdnK6eCQ1L+fR/bgned+Su7cXDmVcrGzdd6c9
-K5SvzST0y6VFuVP5oHp8pec3YCA9ew==
-=VB0J
+yMIgAnicrVJbSBVBGD5WdjlpnIcgEwnaoiDMZm8zuycyywyKkDDyoazj7M6Mrkd3
+j2dXU08aEQgqRGVWUGFFZVRPCRZBpCFpdKObCQaZSWFUBJEPZZdZq6dem5dh/vm+
+7/++n783dWogmDSxLthc0OvJSXd7WqsCkU8PYUIwHFIrhBNClE5etJxQ14tELSKE
+BSACEUuGrCiaqhMDE1lCAFKZUcAwhJIsG5jqEDFTRKIqQqBLiBFJYcyQESVYAkQC
+WMgUmGWX0Hgsbtkel6VYgxCJVMEEYmBomDDd4AKcTiSoahpGDMsK4MRSx/UZ3JyB
+XZplObzGH5Hf9v7F/2ffVZNyuiYhg6oiIDJHSTKGjCFThsg0oQRE3Qe6NG7jCsrR
+MdcitEaozxR4rdoyqT9WP8eff9eqcOyyLEKrOS8WdzzHdMp5vdTzYm7Y53m1MR+4
+ixqRPxIRw7IJnyFnVNO4azm2EBY50vQsX9NPAEUkAZgp0JqYFacRy0eoCGqAH78P
+bxcWFEBFE2FZZZqqIV2VdGYqGiISVU0CVUkFGGlQU4Ci61TTMVOxSQgToahrJpKJ
+4IeqtB0hjLhNXDIZp8TGXlWcCvW3uoumBZKCgenJU/zdCgRnhf5uHN0z42duWdvj
+/OxQw6LH92+8CmZcOTSn8WqjsmR1U9nY4fZR9mwgZ2RR8VM7Kz1fzEgZ/fxQaG2X
+5r0x8aUuqM1ODq3Yey4lZ/+lxLveI+sPpU07ULj1a/Ti+7Tt+erbKePDiYUre7qP
+Lj0//2DKybWrlld+HXlwJ3VwqC7nU3Zh35L+8sHuvI0dLebM/cUd7r7BzV1nQk+O
+NQxVR5t2NEbT4KmUYfx97GaevBuQ182o79GJ0dKMopenLwT3VjZMHC1Ydzn7eKCh
+vrVu+fDA97YN9S3p1zaN137xzl5/sUxcE+gSF8+996PjI9t22+oeel5KEyxdbtuy
+4Fsq3KnkdH7o76S5IfQLJsM8gQ==
+=y/xG
 -----END PGP MESSAGE-----
 
 And finally, I am proving ownership of this host by posting or

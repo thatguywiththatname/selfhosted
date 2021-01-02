@@ -2,30 +2,30 @@
   email simjenner3@gmail.com
 }
 
-simonj.tech {
+simonj.dev {
   log {
-    output file /var/log/caddy/simonj.tech.access.log
+    output file /var/log/caddy/simonj.dev.access.log
   }
   reverse_proxy gostatic:8043
 }
 
-psm.simonj.tech {
+psm.simonj.dev {
   log {
-    output file /var/log/caddy/psm.simonj.tech.access.log
+    output file /var/log/caddy/psm.simonj.dev.access.log
   }
   reverse_proxy psmserver:8080
 }
 
-messenger.simonj.tech {
+messenger.simonj.dev {
   log {
-    output file /var/log/caddy/messenger.simonj.tech.access.log
+    output file /var/log/caddy/messenger.simonj.dev.access.log
   }
   reverse_proxy msserver:8080
 }
 
-spacexlaunchbot.simonj.tech {
+spacexlaunchbot.simonj.dev {
   log {
-    output file /var/log/caddy/spacexlaunchbot.simonj.tech.access.log
+    output file /var/log/caddy/spacexlaunchbot.simonj.dev.access.log
   }
   reverse_proxy spacexlaunchbot-webserver:8080
 }
