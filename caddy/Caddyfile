@@ -29,3 +29,7 @@ slb.simonj.dev {
   }
   reverse_proxy spacexlaunchbot-webserver:8080
 }
+
+pyonair.simonj.dev {
+  reverse_proxy ttn-receiver:8080
+}
