@@ -12,7 +12,7 @@ with open(sys.argv[1], "r") as f:
         data = json.loads(line)
         p = data["payload_fields"]
         time = dateutil.parser.isoparse(data["metadata"]["time"])
-        timeH = time.house
+        timeH = time.hour
         timeM = time.minute
         timeS = time.second
         temp = int(p["temperature"]) / 10
