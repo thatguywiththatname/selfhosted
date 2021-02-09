@@ -10,6 +10,10 @@ import (
 // Note: Data is written to /data, mount that volume to get it.
 
 func writeFile(w http.ResponseWriter, r *http.Request) {
+	if r.Header.Get("Content-Type") != "application/json" {
+		return
+	}
+
     dataBytes, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		log.Println(err)
