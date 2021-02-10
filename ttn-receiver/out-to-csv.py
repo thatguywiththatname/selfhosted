@@ -12,11 +12,10 @@ with open(sys.argv[1], "r") as f:
         data = json.loads(line)
         p = data["payload_fields"]
         time = dateutil.parser.isoparse(data["metadata"]["time"])
-        timeH = time.hour
-        timeM = time.minute
-        timeS = time.second
+        # month/day/year as google sheets prefers that :(
+        datetime = time.strftime("%m/%d/%Y %H:%M:%S")
         temp = int(p["temperature"]) / 10
         humidity = int(p["humidity"]) / 10
         print(
-            f'{timeH}:{timeM}:{timeS},{p["PM1_PM10"]},{p["PM1_PM25"]},{p["PM2_PM10"]},{p["PM2_PM25"]},{temp},{humidity}'
+            f'{datetime},{p["PM1_PM10"]},{p["PM1_PM25"]},{p["PM2_PM10"]},{p["PM2_PM25"]},{temp},{humidity}'
         )
