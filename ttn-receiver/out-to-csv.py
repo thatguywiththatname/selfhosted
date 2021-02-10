@@ -16,6 +16,9 @@ with open(sys.argv[1], "r") as f:
         datetime = time.strftime("%m/%d/%Y %H:%M:%S")
         temp = int(p["temperature"]) / 10
         humidity = int(p["humidity"]) / 10
+        if temp == 0 and humidity == 0:
+            # If these are both zero this is probably a broken reading.
+            continue
         print(
             f'{datetime},{p["PM1_PM10"]},{p["PM1_PM25"]},{p["PM2_PM10"]},{p["PM2_PM25"]},{temp},{humidity}'
         )
